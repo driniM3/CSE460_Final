@@ -32,14 +32,39 @@
                     <div class="form-group">
                         @Html.LabelFor(m => m.Style, new { @class = "control-label" })
                             <select name="Style" class="form-control">
+                                <option value="bootstrap.min.css" @if (Model.Style == "bootstrap.min.css")
+                                                                 { <text>selected</text>}>Default</option>
                                 <option value="amelia.bootstrap.min.css" @if (Model.Style == "amelia.bootstrap.min.css")
                                                                         { <text>selected</text>}>Amelia</option>
                                 <option value="cerulean.bootstrap.min.css" @if (Model.Style == "cerulean.bootstrap.min.css")
                                                                           { <text>selected</text>}>Cerulean</option>
                                 <option value="cosmo.bootstrap.min.css" @if (Model.Style == "cosmo.bootstrap.min.css")
                                                                        { <text>selected</text>}>Cosmo</option>
-                                <option value="bootstrap.min.css" @if (Model.Style == "bootstrap.min.css")
-                                                                 { <text>selected</text>}>Default</option>
+                                <option value="cyborg.bootstrap.min.css" @if (Model.Style == "cyborg.bootstrap.min.css")
+                                                                       { <text>selected</text>}>Cyborg</option>
+                                <option value="darkly.bootstrap.min.css" @if (Model.Style == "darkly.bootstrap.min.css")
+                                                                 { <text>selected</text>}>Darkly</option>
+                                <option value="flatly.bootstrap.min.css" @if (Model.Style == "flatly.bootstrap.min.css")
+                                                                 { <text>selected</text>}>Flatly</option>
+                                <option value="journal.bootstrap.min.css" @if (Model.Style == "journal.bootstrap.min.css")
+                                                                 { <text>selected</text>}>Journal</option>
+                                <option value="lumen.bootstrap.min.css" @if (Model.Style == "lumen.bootstrap.min.css")
+                                                                 { <text>selected</text>}>Lumen</option>
+                                <option value="readable.bootstrap.min.css" @if (Model.Style == "readable.bootstrap.min.css")
+                                                                 { <text>selected</text>}>Readable</option>
+                                <option value="simplex.bootstrap.min.css" @if (Model.Style == "simplex.bootstrap.min.css")
+                                                                 { <text>selected</text>}>Simplex</option>
+                                <option value="slate.bootstrap.min.css" @if (Model.Style == "slate.bootstrap.min.css")
+                                                                 { <text>selected</text>}>Slate</option>
+                                <option value="spacelab.bootstrap.min.css" @if (Model.Style == "spacelab.bootstrap.min.css")
+                                                                 { <text>selected</text>}>SpaceLab</option>
+                                <option value="superhero.bootstrap.min.css" @if (Model.Style == "superhero.bootstrap.min.css")
+                                                                 { <text>selected</text>}>Superhero</option>
+                                <option value="united.bootstrap.min.css" @if (Model.Style == "united.bootstrap.min.css")
+                                                                 { <text>selected</text>}>United</option>
+                                <option value="yeti.bootstrap.min.css" @if (Model.Style == "yeti.bootstrap.min.css")
+                                                                 { <text>selected</text>}>Yeti</option>                                
+
                             </select>
                     </div>
                     <div class="form-group">
