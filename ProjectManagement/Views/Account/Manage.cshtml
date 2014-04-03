@@ -1,0 +1,36 @@
+﻿@model ProjectManagement.Models.LocalPasswordModel
+@{
+    ViewBag.Title = "Manage Account";
+}
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <hgroup class="title">
+            <h1>@ViewBag.Title.</h1>
+        </hgroup>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <p class="message-success">@ViewBag.StatusMessage</p>
+
+        <p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
+
+        <div class="well">
+            <section id="setPasswordForm">
+
+                    @Html.Partial("_ChangePasswordPartial")
+
+            </section>           
+
+        </div>
+
+        <div class="col-lg-2"></div>
+
+
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

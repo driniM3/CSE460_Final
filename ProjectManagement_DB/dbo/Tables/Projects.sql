@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[Projects]
+(
+	[Id] INT IDENTITY(1,1) NOT NULL PRIMARY KEY, 
+    [TenantId] INT NOT NULL REFERENCES TENANTS(Id),
+    [Name] VARCHAR(100) NULL, 
+    [StartDate] DATETIME NULL, 
+    [ExpectedEndDate] DATETIME NULL, 
+    [Status] VARCHAR(50) NULL, 
+    [Manager] NVARCHAR(20) NULL REFERENCES PERSONNEL(Id), 
+)

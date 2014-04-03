@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[RequirementsProjects]
+(
+	[Id] INT IDENTITY(1,1) NOT NULL PRIMARY KEY, 
+    [RequirementId] INT UNIQUE NOT NULL REFERENCES REQUIREMENTS(Id), 
+    [ProjectId] INT NOT NULL REFERENCES PROJECTS(Id)
+)

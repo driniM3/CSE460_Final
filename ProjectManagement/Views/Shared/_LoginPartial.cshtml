@@ -1,0 +1,23 @@
+﻿<ul class="nav navbar-nav navbar-right">
+
+    @if (Request.IsAuthenticated)
+    {
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="user">@User.Identity.Name<span class="caret"></span></a>
+            <ul class="dropdown-menu" aria-labelledby="user">
+                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", style = "display: none" }))
+                {
+                    @Html.AntiForgeryToken()
+                }
+                <li><a href="javascript:document.getElementById('logoutForm').submit()" rel="nofollow" tabindex="-1">Log off</a></li>
+                <li><a href="/ProjectManagement/Account/Manage" rel="nofollow" tabindex="-1">Manage Account</a></li>
+
+            </ul>
+        </li>
+    }
+    else
+    {
+        <li>@Html.ActionLink("Create a Tenant", "Register", "Account", routeValues: new {tenant = "New"}, htmlAttributes: new { id = "registerLink" })</li>
+    }
+
+</ul>

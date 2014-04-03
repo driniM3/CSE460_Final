@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectManagement", "ProjectManagement\ProjectManagement.csproj", "{0D9A4F9A-5DB0-436A-8B47-47CE569F9B26}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ProjectManagement_DB", "ProjectManagement_DB\ProjectManagement_DB.sqlproj", "{05E34322-934A-4F9D-BE0F-9DD7283A0C46}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D9A4F9A-5DB0-436A-8B47-47CE569F9B26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D9A4F9A-5DB0-436A-8B47-47CE569F9B26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D9A4F9A-5DB0-436A-8B47-47CE569F9B26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D9A4F9A-5DB0-436A-8B47-47CE569F9B26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05E34322-934A-4F9D-BE0F-9DD7283A0C46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05E34322-934A-4F9D-BE0F-9DD7283A0C46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05E34322-934A-4F9D-BE0F-9DD7283A0C46}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{05E34322-934A-4F9D-BE0F-9DD7283A0C46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05E34322-934A-4F9D-BE0F-9DD7283A0C46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05E34322-934A-4F9D-BE0F-9DD7283A0C46}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

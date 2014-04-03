@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="Personnel" EntityType="Model.Store.Personnel" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonnelProjects" EntityType="Model.Store.PersonnelProjects" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Projects" EntityType="Model.Store.Projects" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Requirements" EntityType="Model.Store.Requirements" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RequirementsProjects" EntityType="Model.Store.RequirementsProjects" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tenants" EntityType="Model.Store.Tenants" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__Personnel__Perso__412EB0B6" Association="Model.Store.FK__Personnel__Perso__412EB0B6">
+      <End Role="Personnel" EntitySet="Personnel" />
+      <End Role="PersonnelProjects" EntitySet="PersonnelProjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Personnel__Proje__4222D4EF" Association="Model.Store.FK__Personnel__Proje__4222D4EF">
+      <End Role="Projects" EntitySet="Projects" />
+      <End Role="PersonnelProjects" EntitySet="PersonnelProjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Personnel__Tenan__3F466844" Association="Model.Store.FK__Personnel__Tenan__3F466844">
+      <End Role="Tenants" EntitySet="Tenants" />
+      <End Role="Personnel" EntitySet="Personnel" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Projects__Manage__440B1D61" Association="Model.Store.FK__Projects__Manage__440B1D61">
+      <End Role="Personnel" EntitySet="Personnel" />
+      <End Role="Projects" EntitySet="Projects" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Projects__Tenant__4316F928" Association="Model.Store.FK__Projects__Tenant__4316F928">
+      <End Role="Tenants" EntitySet="Tenants" />
+      <End Role="Projects" EntitySet="Projects" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Requireme__Assig__44FF419A" Association="Model.Store.FK__Requireme__Assig__44FF419A">
+      <End Role="Personnel" EntitySet="Personnel" />
+      <End Role="Requirements" EntitySet="Requirements" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Requireme__Proje__46E78A0C" Association="Model.Store.FK__Requireme__Proje__46E78A0C">
+      <End Role="Projects" EntitySet="Projects" />
+      <End Role="RequirementsProjects" EntitySet="RequirementsProjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Requireme__Requi__45F365D3" Association="Model.Store.FK__Requireme__Requi__45F365D3">
+      <End Role="Requirements" EntitySet="Requirements" />
+      <End Role="RequirementsProjects" EntitySet="RequirementsProjects" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Personnel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Type" Type="varchar" MaxLength="50" />
+    <Property Name="TenantId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonnelProjects">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="PersonnelId" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="ProjectId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Projects">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TenantId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="ExpectedEndDate" Type="datetime" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+    <Property Name="Manager" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Requirements">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="Type" Type="varchar" MaxLength="50" />
+    <Property Name="Time" Type="float" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+    <Property Name="Assignee" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="RequirementsProjects">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="RequirementId" Type="int" Nullable="false" />
+    <Property Name="ProjectId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tenants">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Style" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__Personnel__Perso__412EB0B6">
+    <End Role="Personnel" Type="Model.Store.Personnel" Multiplicity="1" />
+    <End Role="PersonnelProjects" Type="Model.Store.PersonnelProjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personnel">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonnelProjects">
+        <PropertyRef Name="PersonnelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Personnel__Proje__4222D4EF">
+    <End Role="Projects" Type="Model.Store.Projects" Multiplicity="1" />
+    <End Role="PersonnelProjects" Type="Model.Store.PersonnelProjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projects">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonnelProjects">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Personnel__Tenan__3F466844">
+    <End Role="Tenants" Type="Model.Store.Tenants" Multiplicity="1" />
+    <End Role="Personnel" Type="Model.Store.Personnel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tenants">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Personnel">
+        <PropertyRef Name="TenantId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Projects__Manage__440B1D61">
+    <End Role="Personnel" Type="Model.Store.Personnel" Multiplicity="0..1" />
+    <End Role="Projects" Type="Model.Store.Projects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personnel">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Projects">
+        <PropertyRef Name="Manager" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Projects__Tenant__4316F928">
+    <End Role="Tenants" Type="Model.Store.Tenants" Multiplicity="1" />
+    <End Role="Projects" Type="Model.Store.Projects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tenants">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Projects">
+        <PropertyRef Name="TenantId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Requireme__Assig__44FF419A">
+    <End Role="Personnel" Type="Model.Store.Personnel" Multiplicity="0..1" />
+    <End Role="Requirements" Type="Model.Store.Requirements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personnel">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Requirements">
+        <PropertyRef Name="Assignee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Requireme__Proje__46E78A0C">
+    <End Role="Projects" Type="Model.Store.Projects" Multiplicity="1" />
+    <End Role="RequirementsProjects" Type="Model.Store.RequirementsProjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projects">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RequirementsProjects">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Requireme__Requi__45F365D3">
+    <End Role="Requirements" Type="Model.Store.Requirements" Multiplicity="1" />
+    <End Role="RequirementsProjects" Type="Model.Store.RequirementsProjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Requirements">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RequirementsProjects">
+        <PropertyRef Name="RequirementId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

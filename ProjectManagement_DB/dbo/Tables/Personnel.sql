@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[Personnel]
+(
+	[Id] NVARCHAR(20) NOT NULL PRIMARY KEY REFERENCES UserProfile(UserName), 
+    [Name] VARCHAR(50) NULL, 
+    [Type] VARCHAR(50) NULL, 
+    [TenantId] INT NOT NULL REFERENCES TENANTS(Id)
+)
