@@ -132,7 +132,7 @@ namespace ProjectManagement.Controllers
                     else if (db.Tenants.Any(x => x.Name == model.Tenant))
                     {
                         WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-
+                          
                         System.Web.Security.Roles.AddUserToRole(model.UserName, "User");
 
                         var tenant = db.Tenants.Where(x => x.Name == model.Tenant).Single();
