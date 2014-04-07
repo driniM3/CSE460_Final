@@ -87,9 +87,10 @@
             <hr class="black" />
 
             <h3>Your Users:</h3>
-            <table class="table table-bordered">
+            <table class="table table-striped">
 
                 <tr>
+                    <th></th>
                     <th>Name</th>
                     <th>Type</th>
                 </tr> 
@@ -97,6 +98,28 @@
                 @foreach (var item in Model.Personnels) {
 
                 <tr>
+                    @if (!item.Type.Equals("Tenant Manager")) {
+                    <td>
+
+                        @using (Html.BeginForm("RemoveUser", "TenantManagement", FormMethod.Post, new { @class = "form-verticle", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary()
+                            <fieldset>
+                               <div class="form-group">
+                                    @Html.Hidden("tenantId", Model.Id)
+                                    @Html.Hidden("username", item.Name)
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-primary form-control" value="Remove User" />
+                                </div>
+                            </fieldset>
+                        }
+
+                    </td>
+                    }else {
+                    <td></td>
+                    }
                     <td>@item.Name</td>
                     <td>@item.Type</td>
                 </tr>
