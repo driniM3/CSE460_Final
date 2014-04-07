@@ -1,7 +1,18 @@
-﻿@model ProjectManagement.Models.TenantModel
+﻿@model ProjectManagement.Models.Tenant
 
 @{
     ViewBag.Title = "Tenant";
+    var listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+        {
+          Text = "Manager",
+          Value = "Manager"
+        });
+   listItems.Add(new SelectListItem
+        {
+            Text = "User",
+            Value = "User",
+        });
 }
 
 <div class="row">
@@ -24,10 +35,10 @@
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary()
                 <fieldset>
-                    @Html.HiddenFor(m => m.id, new { @class = "form-control", value = Model.id })
+                    @Html.HiddenFor(m => m.Id, new { @class = "form-control", value = Model.Id })
                     <div class="form-group">
                         @Html.LabelFor(m => m.Name, new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.Style, new { @class = "control-label" })
@@ -69,6 +80,44 @@
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary form-control" value="Update Tenant" />
+                    </div>
+                </fieldset>
+            }
+
+            <hr class="black" />
+
+            <table class="table">
+
+                <tr>
+                    <th>Users</th>
+                </tr> 
+
+                @foreach (var item in Model.Personnels) {
+
+                <tr>
+                    <td class="left"><@item.Name></td>
+                </tr>
+
+                }
+
+            </table>
+
+            <hr class="black" />
+
+            @using (Html.BeginForm("AddUser", "TenantManagement", FormMethod.Post, new { @class = "form-verticle", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary()
+                <fieldset>
+                   <div class="form-group">
+                       @Html.Hidden("tenantId", Model.Id)
+                        <div class="control-label">Username</div>
+                        @Html.TextBox("username")
+                       <div class="control-label">User Type</div>
+                        @Html.DropDownList("type", listItems, "-- Select User Type--")
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary form-control" value="Add User" />
                     </div>
                 </fieldset>
             }
