@@ -113,6 +113,10 @@
                        @Html.Hidden("tenantId", Model.Id)
                         <div class="control-label">Username</div>
                         @Html.TextBox("username")
+                       <div class="control-label">Password</div>
+                        @Html.TextBox("password")
+                       <div class="control-label">Confirm Password</div>
+                        @Html.TextBox("passwordConfirm")
                        <div class="control-label">User Type</div>
                         @Html.DropDownList("type", listItems, "-- Select User Type--")
                     </div>

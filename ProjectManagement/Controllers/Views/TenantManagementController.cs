@@ -1,9 +1,16 @@
-﻿using ProjectManagement.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using DotNetOpenAuth.AspNet;
+using Microsoft.Web.WebPages.OAuth;
+using WebMatrix.WebData;
+using ProjectManagement.Filters;
+using ProjectManagement.Models;
+
 
 namespace ProjectManagement.Controllers.Views
 {
@@ -39,21 +46,38 @@ namespace ProjectManagement.Controllers.Views
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddUser(String tenantId, string username, string type)
+        public ActionResult AddUser(String tenantId, string username, string password, string passwordConfirm, string type)
         {
 
-            var person = new Personnel
+            if (password == passwordConfirm)
             {
-                Id = username,
-                Name = username,
-                TenantId = Convert.ToInt32(tenantId),
-                Type = "User"
-            };
+                int Id = Convert.ToInt32(tenantId);
+                var tenant = db.Tenants.Where(x => x.Id == Id).Single();
 
-            db.Personnels.Add(person);
-            db.SaveChanges();
+                WebSecurity.CreateUserAndAccount(username, password);
+                System.Web.Security.Roles.AddUserToRole(username, type);
 
-            return RedirectToAction("Index", new {  });
+                var person = new Personnel
+                {
+                    Id = username,
+                    Name = username,
+                    TenantId = Id,
+                    Type = type
+                };
+
+                db.Personnels.Add(person);
+                db.SaveChanges();
+
+                tenant.Personnels.Add(person);
+                db.Tenants.Attach(tenant);
+                db.Entry(tenant).State = System.Data.EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Index", new { });
+            }
+
+            return RedirectToAction("NotFound", "Error");
+
         }
     }
 }
