@@ -86,16 +86,19 @@
 
             <hr class="black" />
 
-            <table class="table">
+            <h3>Your Users:</h3>
+            <table class="table table-bordered">
 
                 <tr>
-                    <th>Users</th>
+                    <th>Name</th>
+                    <th>Type</th>
                 </tr> 
 
                 @foreach (var item in Model.Personnels) {
 
                 <tr>
-                    <td class="left"><@item.Name></td>
+                    <td>@item.Name</td>
+                    <td>@item.Type</td>
                 </tr>
 
                 }
@@ -112,13 +115,13 @@
                    <div class="form-group">
                        @Html.Hidden("tenantId", Model.Id)
                         <div class="control-label">Username</div>
-                        @Html.TextBox("username")
+                        @Html.TextBox("username", "", new { @class = "form-control" })
                        <div class="control-label">Password</div>
-                        @Html.TextBox("password")
+                        @Html.TextBox("password", "", new { @class = "form-control", @type="password" })
                        <div class="control-label">Confirm Password</div>
-                        @Html.TextBox("passwordConfirm")
+                        @Html.TextBox("passwordConfirm","", new { @class = "form-control", @type="password" })
                        <div class="control-label">User Type</div>
-                        @Html.DropDownList("type", listItems, "-- Select User Type--")
+                        @Html.DropDownList("type", listItems, "-- Select User Type--", new { @class = "form-control" })
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary form-control" value="Add User" />
