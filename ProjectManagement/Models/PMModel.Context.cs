@@ -26,7 +26,7 @@ namespace ProjectManagement.Models
         }
     
         public DbSet<Personnel> Personnels { get; set; }
-        public DbSet<PersonnelProject> PersonnelProjects { get; set; }
+        public DbSet<ProjectPersonnel> ProjectPersonnels { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Requirement> Requirements { get; set; }
         public DbSet<RequirementsProject> RequirementsProjects { get; set; }

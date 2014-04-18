@@ -132,9 +132,9 @@
     <Build Include="dbo\Tables\Tenants.sql" />
     <Build Include="dbo\Tables\Personnel.sql" />
     <Build Include="dbo\Tables\Projects.sql" />
-    <Build Include="dbo\Tables\PersonnelProjects.sql" />
     <Build Include="dbo\Tables\Requirements.sql" />
     <Build Include="dbo\Tables\RequirementsProjects.sql" />
+    <Build Include="dbo\Tables\ProjectPersonnels.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Seed.sql" />

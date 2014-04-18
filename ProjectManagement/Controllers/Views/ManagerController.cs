@@ -27,6 +27,16 @@ namespace ProjectManagement.Controllers.Views
             return RedirectToAction("NotFound", "Error");
         }
 
+        public ActionResult Project(string tenant, int projectId)
+        {
+            if (db.Personnels.Where(x => x.Id == User.Identity.Name).Single().Tenant.Name.ToLower() == tenant.ToLower())
+            {
+                var project = db.Projects.Where(x => x.Id == projectId).Single();
+                return View(project);
+            }
+            return RedirectToAction("NotFound", "Error");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditProjectStatus(String TenantId, String ProjectName, String NewStatus)
@@ -54,11 +64,6 @@ namespace ProjectManagement.Controllers.Views
 
             db.Projects.Add(project);
             db.SaveChanges();
-
-            //tenant.Personnels.Add(project);
-            //db.Tenants.Attach(tenant);
-            //db.Entry(tenant).State = System.Data.EntityState.Modified;
-            //db.SaveChanges();
 
             return RedirectToAction("Index", new { });
         }

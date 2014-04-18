@@ -12,20 +12,13 @@ namespace ProjectManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Tenant
+    public partial class ProjectPersonnel
     {
-        public Tenant()
-        {
-            this.Personnels = new HashSet<Personnel>();
-            this.Projects = new HashSet<Project>();
-        }
-    
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Style { get; set; }
-        public string Logo { get; set; }
+        public int ProjectId { get; set; }
+        public string PersonnelId { get; set; }
     
-        public virtual ICollection<Personnel> Personnels { get; set; }
-        public virtual ICollection<Project> Projects { get; set; }
+        public virtual Personnel Personnel { get; set; }
+        public virtual Project Project { get; set; }
     }
 }

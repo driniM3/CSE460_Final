@@ -198,9 +198,6 @@
     <Compile Include="Models\Personnel.cs">
       <DependentUpon>PMModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PersonnelProject.cs">
-      <DependentUpon>PMModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\PMModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -217,6 +214,9 @@
       <DependentUpon>PMModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Project.cs">
+      <DependentUpon>PMModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProjectPersonnel.cs">
       <DependentUpon>PMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Requirement.cs">
@@ -308,6 +308,11 @@
     <Content Include="Content\themes\yeti.bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\css\bootstrap-theme.css.map" />
+    <Content Include="Content\css\bootstrap.css.map" />
     <EntityDeploy Include="Models\PMModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>PMModel.Designer.cs</LastGenOutput>
@@ -325,11 +330,6 @@
       <DependentUpon>PMModel.edmx</DependentUpon>
       <LastGenOutput>PMModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\css\bootstrap-theme.css.map" />
-    <Content Include="Content\css\bootstrap.css.map" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
@@ -384,6 +384,7 @@
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Manager\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Manager\Project.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="PMEntities">
+  <EntityContainerMapping StorageEntityContainer="ProjectManagementDBModelStoreContainer" CdmEntityContainer="PMEntities">
     <EntitySetMapping Name="Personnels">
-      <EntityTypeMapping TypeName="Model.Personnel">
+      <EntityTypeMapping TypeName="ProjectManagementDBModel.Personnel">
         <MappingFragment StoreEntitySet="Personnel">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -11,17 +11,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="PersonnelProjects">
-      <EntityTypeMapping TypeName="Model.PersonnelProject">
-        <MappingFragment StoreEntitySet="PersonnelProjects">
+    <EntitySetMapping Name="ProjectPersonnels">
+      <EntityTypeMapping TypeName="ProjectManagementDBModel.ProjectPersonnel">
+        <MappingFragment StoreEntitySet="ProjectPersonnels">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="PersonnelId" ColumnName="PersonnelId" />
           <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+          <ScalarProperty Name="PersonnelId" ColumnName="PersonnelId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Projects">
-      <EntityTypeMapping TypeName="Model.Project">
+      <EntityTypeMapping TypeName="ProjectManagementDBModel.Project">
         <MappingFragment StoreEntitySet="Projects">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="TenantId" ColumnName="TenantId" />
@@ -34,7 +34,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Requirements">
-      <EntityTypeMapping TypeName="Model.Requirement">
+      <EntityTypeMapping TypeName="ProjectManagementDBModel.Requirement">
         <MappingFragment StoreEntitySet="Requirements">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -47,7 +47,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="RequirementsProjects">
-      <EntityTypeMapping TypeName="Model.RequirementsProject">
+      <EntityTypeMapping TypeName="ProjectManagementDBModel.RequirementsProject">
         <MappingFragment StoreEntitySet="RequirementsProjects">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="RequirementId" ColumnName="RequirementId" />
@@ -56,11 +56,12 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Tenants">
-      <EntityTypeMapping TypeName="Model.Tenant">
+      <EntityTypeMapping TypeName="ProjectManagementDBModel.Tenant">
         <MappingFragment StoreEntitySet="Tenants">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Style" ColumnName="Style" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

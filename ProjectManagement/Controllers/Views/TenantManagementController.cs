@@ -79,45 +79,7 @@ namespace ProjectManagement.Controllers.Views
             return RedirectToAction("NotFound", "Error");
 
         }
-
-        public ActionResult RemoveUser(string username, string tenantId)
-        {
-            if (username != null && tenantId != null)
-            {
-                int Id = Convert.ToInt32(tenantId);
-                var tenant = db.Tenants.Where(x => x.Id == Id).Single();
-
-                Personnel personToRemove = null;
-                foreach (Personnel person in tenant.Personnels)
-                {
-                    if (person.Name.Equals(username))
-                    {
-                        personToRemove = person;
-                        break;
-                    }
-                }
-
-                if (personToRemove != null)
-                {
-
-        //            ((SimpleMembershipProvider)Membership.Provider).DeleteAccount(username);
-        //            ((SimpleMembershipProvider)Membership.Provider).DeleteUser(username, true);
-
-                    db.Personnels.Remove(personToRemove);
-                    db.Entry(personToRemove).State = System.Data.EntityState.Deleted;
-                    db.SaveChanges();
-
-                    tenant.Personnels.Remove(personToRemove);
-                    db.Tenants.Attach(tenant);
-                    db.Entry(tenant).State = System.Data.EntityState.Modified;
-                    db.SaveChanges();
-
-
-                }
-
-            }
-            return RedirectToAction("Index", new { });
-        }
+        
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -126,7 +88,7 @@ namespace ProjectManagement.Controllers.Views
             if (tenantId != null && logoUrl != null)
             {
                 int Id = Convert.ToInt32(tenantId);
-                var tenant = db.Tenants.Where(x => x.Id == model.Id).Single();
+                var tenant = db.Tenants.Where(x => x.Id == Id).Single();
             }
             return RedirectToAction("Index", new { });
         }

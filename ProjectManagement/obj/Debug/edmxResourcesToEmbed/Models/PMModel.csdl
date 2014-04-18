@@ -1,41 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="ProjectManagementDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="PMEntities" p1:LazyLoadingEnabled="true">
-    <EntitySet Name="Personnels" EntityType="Model.Personnel" />
-    <EntitySet Name="PersonnelProjects" EntityType="Model.PersonnelProject" />
-    <EntitySet Name="Projects" EntityType="Model.Project" />
-    <EntitySet Name="Requirements" EntityType="Model.Requirement" />
-    <EntitySet Name="RequirementsProjects" EntityType="Model.RequirementsProject" />
-    <EntitySet Name="Tenants" EntityType="Model.Tenant" />
-    <AssociationSet Name="FK__Personnel__Perso__412EB0B6" Association="Model.FK__Personnel__Perso__412EB0B6">
-      <End Role="Personnel" EntitySet="Personnels" />
-      <End Role="PersonnelProjects" EntitySet="PersonnelProjects" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Personnel__Tenan__3F466844" Association="Model.FK__Personnel__Tenan__3F466844">
+    <EntitySet Name="Personnels" EntityType="ProjectManagementDBModel.Personnel" />
+    <EntitySet Name="ProjectPersonnels" EntityType="ProjectManagementDBModel.ProjectPersonnel" />
+    <EntitySet Name="Projects" EntityType="ProjectManagementDBModel.Project" />
+    <EntitySet Name="Requirements" EntityType="ProjectManagementDBModel.Requirement" />
+    <EntitySet Name="RequirementsProjects" EntityType="ProjectManagementDBModel.RequirementsProject" />
+    <EntitySet Name="Tenants" EntityType="ProjectManagementDBModel.Tenant" />
+    <AssociationSet Name="FK__Personnel__Tenan__2F10007B" Association="ProjectManagementDBModel.FK__Personnel__Tenan__2F10007B">
       <End Role="Tenants" EntitySet="Tenants" />
       <End Role="Personnel" EntitySet="Personnels" />
     </AssociationSet>
-    <AssociationSet Name="FK__Projects__Manage__440B1D61" Association="Model.FK__Projects__Manage__440B1D61">
+    <AssociationSet Name="FK__ProjectPe__Perso__5DCAEF64" Association="ProjectManagementDBModel.FK__ProjectPe__Perso__5DCAEF64">
+      <End Role="Personnel" EntitySet="Personnels" />
+      <End Role="ProjectPersonnels" EntitySet="ProjectPersonnels" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Projects__Manage__32E0915F" Association="ProjectManagementDBModel.FK__Projects__Manage__32E0915F">
       <End Role="Personnel" EntitySet="Personnels" />
       <End Role="Projects" EntitySet="Projects" />
     </AssociationSet>
-    <AssociationSet Name="FK__Requireme__Assig__44FF419A" Association="Model.FK__Requireme__Assig__44FF419A">
+    <AssociationSet Name="FK__Requireme__Assig__33D4B598" Association="ProjectManagementDBModel.FK__Requireme__Assig__33D4B598">
       <End Role="Personnel" EntitySet="Personnels" />
       <End Role="Requirements" EntitySet="Requirements" />
     </AssociationSet>
-    <AssociationSet Name="FK__Personnel__Proje__4222D4EF" Association="Model.FK__Personnel__Proje__4222D4EF">
+    <AssociationSet Name="FK__ProjectPe__Proje__5CD6CB2B" Association="ProjectManagementDBModel.FK__ProjectPe__Proje__5CD6CB2B">
       <End Role="Projects" EntitySet="Projects" />
-      <End Role="PersonnelProjects" EntitySet="PersonnelProjects" />
+      <End Role="ProjectPersonnels" EntitySet="ProjectPersonnels" />
     </AssociationSet>
-    <AssociationSet Name="FK__Projects__Tenant__4316F928" Association="Model.FK__Projects__Tenant__4316F928">
+    <AssociationSet Name="FK__Projects__Tenant__31EC6D26" Association="ProjectManagementDBModel.FK__Projects__Tenant__31EC6D26">
       <End Role="Tenants" EntitySet="Tenants" />
       <End Role="Projects" EntitySet="Projects" />
     </AssociationSet>
-    <AssociationSet Name="FK__Requireme__Proje__46E78A0C" Association="Model.FK__Requireme__Proje__46E78A0C">
+    <AssociationSet Name="FK__Requireme__Proje__35BCFE0A" Association="ProjectManagementDBModel.FK__Requireme__Proje__35BCFE0A">
       <End Role="Projects" EntitySet="Projects" />
       <End Role="RequirementsProjects" EntitySet="RequirementsProjects" />
     </AssociationSet>
-    <AssociationSet Name="FK__Requireme__Requi__45F365D3" Association="Model.FK__Requireme__Requi__45F365D3">
+    <AssociationSet Name="FK__Requireme__Requi__34C8D9D1" Association="ProjectManagementDBModel.FK__Requireme__Requi__34C8D9D1">
       <End Role="Requirements" EntitySet="Requirements" />
       <End Role="RequirementsProjects" EntitySet="RequirementsProjects" />
     </AssociationSet>
@@ -48,20 +48,20 @@
     <Property Name="Name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="Type" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="TenantId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="PersonnelProjects" Relationship="Model.FK__Personnel__Perso__412EB0B6" FromRole="Personnel" ToRole="PersonnelProjects" />
-    <NavigationProperty Name="Tenant" Relationship="Model.FK__Personnel__Tenan__3F466844" FromRole="Personnel" ToRole="Tenants" />
-    <NavigationProperty Name="Projects" Relationship="Model.FK__Projects__Manage__440B1D61" FromRole="Personnel" ToRole="Projects" />
-    <NavigationProperty Name="Requirements" Relationship="Model.FK__Requireme__Assig__44FF419A" FromRole="Personnel" ToRole="Requirements" />
+    <NavigationProperty Name="Tenant" Relationship="ProjectManagementDBModel.FK__Personnel__Tenan__2F10007B" FromRole="Personnel" ToRole="Tenants" />
+    <NavigationProperty Name="ProjectPersonnels" Relationship="ProjectManagementDBModel.FK__ProjectPe__Perso__5DCAEF64" FromRole="Personnel" ToRole="ProjectPersonnels" />
+    <NavigationProperty Name="Projects" Relationship="ProjectManagementDBModel.FK__Projects__Manage__32E0915F" FromRole="Personnel" ToRole="Projects" />
+    <NavigationProperty Name="Requirements" Relationship="ProjectManagementDBModel.FK__Requireme__Assig__33D4B598" FromRole="Personnel" ToRole="Requirements" />
   </EntityType>
-  <EntityType Name="PersonnelProject">
+  <EntityType Name="ProjectPersonnel">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-    <Property Name="PersonnelId" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
     <Property Name="ProjectId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Personnel" Relationship="Model.FK__Personnel__Perso__412EB0B6" FromRole="PersonnelProjects" ToRole="Personnel" />
-    <NavigationProperty Name="Project" Relationship="Model.FK__Personnel__Proje__4222D4EF" FromRole="PersonnelProjects" ToRole="Projects" />
+    <Property Name="PersonnelId" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Personnel" Relationship="ProjectManagementDBModel.FK__ProjectPe__Perso__5DCAEF64" FromRole="ProjectPersonnels" ToRole="Personnel" />
+    <NavigationProperty Name="Project" Relationship="ProjectManagementDBModel.FK__ProjectPe__Proje__5CD6CB2B" FromRole="ProjectPersonnels" ToRole="Projects" />
   </EntityType>
   <EntityType Name="Project">
     <Key>
@@ -74,10 +74,10 @@
     <Property Name="ExpectedEndDate" Type="DateTime" Precision="3" />
     <Property Name="Status" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="Manager" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
-    <NavigationProperty Name="Personnel" Relationship="Model.FK__Projects__Manage__440B1D61" FromRole="Projects" ToRole="Personnel" />
-    <NavigationProperty Name="PersonnelProjects" Relationship="Model.FK__Personnel__Proje__4222D4EF" FromRole="Projects" ToRole="PersonnelProjects" />
-    <NavigationProperty Name="Tenant" Relationship="Model.FK__Projects__Tenant__4316F928" FromRole="Projects" ToRole="Tenants" />
-    <NavigationProperty Name="RequirementsProjects" Relationship="Model.FK__Requireme__Proje__46E78A0C" FromRole="Projects" ToRole="RequirementsProjects" />
+    <NavigationProperty Name="Personnel" Relationship="ProjectManagementDBModel.FK__Projects__Manage__32E0915F" FromRole="Projects" ToRole="Personnel" />
+    <NavigationProperty Name="ProjectPersonnels" Relationship="ProjectManagementDBModel.FK__ProjectPe__Proje__5CD6CB2B" FromRole="Projects" ToRole="ProjectPersonnels" />
+    <NavigationProperty Name="Tenant" Relationship="ProjectManagementDBModel.FK__Projects__Tenant__31EC6D26" FromRole="Projects" ToRole="Tenants" />
+    <NavigationProperty Name="RequirementsProjects" Relationship="ProjectManagementDBModel.FK__Requireme__Proje__35BCFE0A" FromRole="Projects" ToRole="RequirementsProjects" />
   </EntityType>
   <EntityType Name="Requirement">
     <Key>
@@ -90,8 +90,8 @@
     <Property Name="Time" Type="Double" />
     <Property Name="Status" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="Assignee" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
-    <NavigationProperty Name="Personnel" Relationship="Model.FK__Requireme__Assig__44FF419A" FromRole="Requirements" ToRole="Personnel" />
-    <NavigationProperty Name="RequirementsProjects" Relationship="Model.FK__Requireme__Requi__45F365D3" FromRole="Requirements" ToRole="RequirementsProjects" />
+    <NavigationProperty Name="Personnel" Relationship="ProjectManagementDBModel.FK__Requireme__Assig__33D4B598" FromRole="Requirements" ToRole="Personnel" />
+    <NavigationProperty Name="RequirementsProjects" Relationship="ProjectManagementDBModel.FK__Requireme__Requi__34C8D9D1" FromRole="Requirements" ToRole="RequirementsProjects" />
   </EntityType>
   <EntityType Name="RequirementsProject">
     <Key>
@@ -100,8 +100,8 @@
     <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
     <Property Name="RequirementId" Type="Int32" Nullable="false" />
     <Property Name="ProjectId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Project" Relationship="Model.FK__Requireme__Proje__46E78A0C" FromRole="RequirementsProjects" ToRole="Projects" />
-    <NavigationProperty Name="Requirement" Relationship="Model.FK__Requireme__Requi__45F365D3" FromRole="RequirementsProjects" ToRole="Requirements" />
+    <NavigationProperty Name="Project" Relationship="ProjectManagementDBModel.FK__Requireme__Proje__35BCFE0A" FromRole="RequirementsProjects" ToRole="Projects" />
+    <NavigationProperty Name="Requirement" Relationship="ProjectManagementDBModel.FK__Requireme__Requi__34C8D9D1" FromRole="RequirementsProjects" ToRole="Requirements" />
   </EntityType>
   <EntityType Name="Tenant">
     <Key>
@@ -110,24 +110,13 @@
     <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="Style" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-    <NavigationProperty Name="Personnels" Relationship="Model.FK__Personnel__Tenan__3F466844" FromRole="Tenants" ToRole="Personnel" />
-    <NavigationProperty Name="Projects" Relationship="Model.FK__Projects__Tenant__4316F928" FromRole="Tenants" ToRole="Projects" />
+    <Property Name="Logo" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Personnels" Relationship="ProjectManagementDBModel.FK__Personnel__Tenan__2F10007B" FromRole="Tenants" ToRole="Personnel" />
+    <NavigationProperty Name="Projects" Relationship="ProjectManagementDBModel.FK__Projects__Tenant__31EC6D26" FromRole="Tenants" ToRole="Projects" />
   </EntityType>
-  <Association Name="FK__Personnel__Perso__412EB0B6">
-    <End Role="Personnel" Type="Model.Personnel" Multiplicity="1" />
-    <End Role="PersonnelProjects" Type="Model.PersonnelProject" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Personnel">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PersonnelProjects">
-        <PropertyRef Name="PersonnelId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Personnel__Tenan__3F466844">
-    <End Role="Tenants" Type="Model.Tenant" Multiplicity="1" />
-    <End Role="Personnel" Type="Model.Personnel" Multiplicity="*" />
+  <Association Name="FK__Personnel__Tenan__2F10007B">
+    <End Role="Tenants" Type="ProjectManagementDBModel.Tenant" Multiplicity="1" />
+    <End Role="Personnel" Type="ProjectManagementDBModel.Personnel" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Tenants">
         <PropertyRef Name="Id" />
@@ -137,9 +126,21 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Projects__Manage__440B1D61">
-    <End Role="Personnel" Type="Model.Personnel" Multiplicity="0..1" />
-    <End Role="Projects" Type="Model.Project" Multiplicity="*" />
+  <Association Name="FK__ProjectPe__Perso__5DCAEF64">
+    <End Role="Personnel" Type="ProjectManagementDBModel.Personnel" Multiplicity="1" />
+    <End Role="ProjectPersonnels" Type="ProjectManagementDBModel.ProjectPersonnel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personnel">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProjectPersonnels">
+        <PropertyRef Name="PersonnelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Projects__Manage__32E0915F">
+    <End Role="Personnel" Type="ProjectManagementDBModel.Personnel" Multiplicity="0..1" />
+    <End Role="Projects" Type="ProjectManagementDBModel.Project" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Personnel">
         <PropertyRef Name="Id" />
@@ -149,9 +150,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Requireme__Assig__44FF419A">
-    <End Role="Personnel" Type="Model.Personnel" Multiplicity="0..1" />
-    <End Role="Requirements" Type="Model.Requirement" Multiplicity="*" />
+  <Association Name="FK__Requireme__Assig__33D4B598">
+    <End Role="Personnel" Type="ProjectManagementDBModel.Personnel" Multiplicity="0..1" />
+    <End Role="Requirements" Type="ProjectManagementDBModel.Requirement" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Personnel">
         <PropertyRef Name="Id" />
@@ -161,21 +162,21 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Personnel__Proje__4222D4EF">
-    <End Role="Projects" Type="Model.Project" Multiplicity="1" />
-    <End Role="PersonnelProjects" Type="Model.PersonnelProject" Multiplicity="*" />
+  <Association Name="FK__ProjectPe__Proje__5CD6CB2B">
+    <End Role="Projects" Type="ProjectManagementDBModel.Project" Multiplicity="1" />
+    <End Role="ProjectPersonnels" Type="ProjectManagementDBModel.ProjectPersonnel" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Projects">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="PersonnelProjects">
+      <Dependent Role="ProjectPersonnels">
         <PropertyRef Name="ProjectId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Projects__Tenant__4316F928">
-    <End Role="Tenants" Type="Model.Tenant" Multiplicity="1" />
-    <End Role="Projects" Type="Model.Project" Multiplicity="*" />
+  <Association Name="FK__Projects__Tenant__31EC6D26">
+    <End Role="Tenants" Type="ProjectManagementDBModel.Tenant" Multiplicity="1" />
+    <End Role="Projects" Type="ProjectManagementDBModel.Project" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Tenants">
         <PropertyRef Name="Id" />
@@ -185,9 +186,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Requireme__Proje__46E78A0C">
-    <End Role="Projects" Type="Model.Project" Multiplicity="1" />
-    <End Role="RequirementsProjects" Type="Model.RequirementsProject" Multiplicity="*" />
+  <Association Name="FK__Requireme__Proje__35BCFE0A">
+    <End Role="Projects" Type="ProjectManagementDBModel.Project" Multiplicity="1" />
+    <End Role="RequirementsProjects" Type="ProjectManagementDBModel.RequirementsProject" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Projects">
         <PropertyRef Name="Id" />
@@ -197,9 +198,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Requireme__Requi__45F365D3">
-    <End Role="Requirements" Type="Model.Requirement" Multiplicity="1" />
-    <End Role="RequirementsProjects" Type="Model.RequirementsProject" Multiplicity="*" />
+  <Association Name="FK__Requireme__Requi__34C8D9D1">
+    <End Role="Requirements" Type="ProjectManagementDBModel.Requirement" Multiplicity="1" />
+    <End Role="RequirementsProjects" Type="ProjectManagementDBModel.RequirementsProject" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Requirements">
         <PropertyRef Name="Id" />

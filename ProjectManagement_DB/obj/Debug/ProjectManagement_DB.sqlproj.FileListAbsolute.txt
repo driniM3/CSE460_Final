@@ -8,3 +8,7 @@ C:\Users\axwilliamson\Documents\GitHub\CSE460_Final\ProjectManagement_DB\bin\Deb
 C:\Users\axwilliamson\Documents\GitHub\CSE460_Final\ProjectManagement_DB\bin\Debug\ProjectManagement_DB.pdb
 C:\Users\axwilliamson\Documents\GitHub\CSE460_Final\ProjectManagement_DB\obj\Debug\ProjectManagement_DB.dll
 C:\Users\axwilliamson\Documents\GitHub\CSE460_Final\ProjectManagement_DB\obj\Debug\ProjectManagement_DB.pdb
+C:\Users\Administrator\documents\visual studio 2012\Projects\CSE460_SAAS\ProjectManagement_DB\obj\Debug\Model.xml
+C:\Users\Administrator\documents\visual studio 2012\Projects\CSE460_SAAS\ProjectManagement_DB\obj\Debug\refactor.xml
+C:\Users\Administrator\documents\visual studio 2012\Projects\CSE460_SAAS\ProjectManagement_DB\obj\Debug\postdeploy.sql
+C:\Users\Administrator\documents\visual studio 2012\Projects\CSE460_SAAS\ProjectManagement_DB\obj\Debug\predeploy.sql

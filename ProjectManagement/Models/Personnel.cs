@@ -16,7 +16,7 @@ namespace ProjectManagement.Models
     {
         public Personnel()
         {
-            this.PersonnelProjects = new HashSet<PersonnelProject>();
+            this.ProjectPersonnels = new HashSet<ProjectPersonnel>();
             this.Projects = new HashSet<Project>();
             this.Requirements = new HashSet<Requirement>();
         }
@@ -26,8 +26,8 @@ namespace ProjectManagement.Models
         public string Type { get; set; }
         public int TenantId { get; set; }
     
-        public virtual ICollection<PersonnelProject> PersonnelProjects { get; set; }
         public virtual Tenant Tenant { get; set; }
+        public virtual ICollection<ProjectPersonnel> ProjectPersonnels { get; set; }
         public virtual ICollection<Project> Projects { get; set; }
         public virtual ICollection<Requirement> Requirements { get; set; }
     }
