@@ -339,3 +339,4 @@ F:\Development\source-code\Git\CSE460_Final\ProjectManagement\bin\zh-Hant\System
 F:\Development\source-code\Git\CSE460_Final\ProjectManagement\obj\Debug\ProjectManagement.csprojResolveAssemblyReference.cache
 F:\Development\source-code\Git\CSE460_Final\ProjectManagement\obj\Debug\ProjectManagement.dll
 F:\Development\source-code\Git\CSE460_Final\ProjectManagement\obj\Debug\ProjectManagement.pdb
+C:\Users\axwilliamson\Documents\GitHub\CSE460_Final\ProjectManagement\bin\ProjectManagement.dll.config

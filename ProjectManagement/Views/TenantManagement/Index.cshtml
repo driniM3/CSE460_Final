@@ -148,6 +148,111 @@
                 </fieldset>
             }
 
+            <hr class="black" />
+
+            <h3>Your Projects:</h3>
+
+            @if (Model.Projects.Count == 0)
+            {
+                <div class="row">
+                    <div class="col-md-12" style="vertical-align: middle">No Projects Created</div>
+                </div>
+            }
+            else
+            {
+
+                <div class="row">
+                    <div class="col-md-1" style="vertical-align: middle">Id</div>
+                    <div class="col-md-2" style="vertical-align: middle">Name</div>
+                    <div class="col-md-2" style="vertical-align: middle">Start Date</div>
+                    <div class="col-md-2" style="vertical-align: middle">Expected End Date</div>
+                    <div class="col-md-1" style="vertical-align: middle">Status</div>
+                    <div class="col-md-2" style="vertical-align: middle">Manager</div>
+                    <div class="col-md-2" style="vertical-align: middle">Workers</div>
+                </div>
+
+                foreach (ProjectManagement.Models.Project project in Model.Projects)
+                {
+                    if (project != null)
+                    {
+                        <div class="row">
+                            <div class="col-md-1" style="vertical-align: middle">@project.Id</div>
+                            <div class="col-md-2" style="vertical-align: middle">@project.Name</div>
+                            <div class="col-md-2" style="vertical-align: middle">@project.StartDate</div>
+                            <div class="col-md-2" style="vertical-align: middle">@project.ExpectedEndDate</div>
+                            <div class="col-md-1" style="vertical-align: middle">@project.Status</div>
+                            <div class="col-md-2" style="vertical-align: middle">@project.Manager</div>
+                            <div class="col-md-2" style="vertical-align: middle">
+
+                                @if (project.ProjectPersonnels.Count == 0)
+                                {
+                                    <div class="row">
+                                        None
+                                    </div>
+                                }
+                                else
+                                {
+                                    foreach (ProjectManagement.Models.ProjectPersonnel projectPersonnel in project.ProjectPersonnels) {
+                                    <div class="row">
+                                        @projectPersonnel.Personnel.Name
+                                    </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    }
+                }
+            }
+
+            <hr class="black" />
+
+            <h3>Your Requirements:</h3>
+
+            @if (ViewBag.TenantRequirements.Count == 0)
+            {
+                <div class="row">
+                    <div class="col-md-12" style="vertical-align: middle">No Requirements Currently Assigned</div>
+                </div>
+            }
+            else
+            {
+
+                <div class="row">
+                    <div class="col-md-1" style="vertical-align: middle">Id</div>
+                    <div class="col-md-2" style="vertical-align: middle">Name</div>
+                    <div class="col-md-2" style="vertical-align: middle">Description</div>
+                    <div class="col-md-1" style="vertical-align: middle">Type</div>
+                    <div class="col-md-1" style="vertical-align: middle">Time</div>
+                    <div class="col-md-2" style="vertical-align: middle">Status</div>
+                    <div class="col-md-1" style="vertical-align: middle">ProjectId</div>
+                    <div class="col-md-2" style="vertical-align: middle">ProjectName</div>
+                </div>
+
+                foreach (ProjectManagement.Models.Requirement requirement in ViewBag.TenantRequirements)
+                {
+                    if (requirement != null) { 
+                        <div class="row">
+                            <div class="col-md-1" style="vertical-align: middle">@requirement.Id</div>
+                            <div class="col-md-2" style="vertical-align: middle">@requirement.Name</div>
+                            <div class="col-md-2" style="vertical-align: middle">@requirement.Description</div>
+                            <div class="col-md-1" style="vertical-align: middle">@requirement.Type</div>
+                            <div class="col-md-1" style="vertical-align: middle">@requirement.Time</div>
+                            <div class="col-md-2" style="vertical-align: middle">@requirement.Status</div>
+
+                            @if (requirement.RequirementsProjects.Count > 0) { 
+                                <div class="col-md-1" style="vertical-align: middle">@requirement.RequirementsProjects.Where(x => x.RequirementId == requirement.Id).Single().Project.Id</div>
+                                <div class="col-md-2" style="vertical-align: middle">@requirement.RequirementsProjects.Where(x => x.RequirementId == requirement.Id).Single().Project.Name</div>
+                            }
+                            else
+                            {
+                                 <div class="col-md-1" style="vertical-align: middle">None</div>
+                                <div class="col-md-2" style="vertical-align: middle">None</div>
+                            }
+                        </div>
+                    }
+                }
+            }
+
         </div>
     </div>
 </div>

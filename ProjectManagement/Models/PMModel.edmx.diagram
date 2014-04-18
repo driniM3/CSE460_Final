@@ -6,10 +6,10 @@
     <edmx:Diagrams>
       <Diagram DiagramId="cb9af27a5fd64737b63c42e3afb84745" Name="Diagram1">
         <EntityTypeShape EntityType="ProjectManagementDBModel.Personnel" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectManagementDBModel.ProjectPersonnel" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagementDBModel.ProjectPersonnel" Width="2" PointX="5.25" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectManagementDBModel.Project" Width="1.5" PointX="8.25" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectManagementDBModel.Requirement" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectManagementDBModel.RequirementsProject" Width="1.5" PointX="10.5" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectManagementDBModel.RequirementsProject" Width="3.125" PointX="10.75" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ProjectManagementDBModel.Tenant" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
         <AssociationConnector Association="ProjectManagementDBModel.FK__Personnel__Tenan__2F10007B" ManuallyRouted="false" />
         <AssociationConnector Association="ProjectManagementDBModel.FK__ProjectPe__Perso__5DCAEF64" ManuallyRouted="false" />
