@@ -1,7 +1,109 @@
-﻿@model ProjectManagement.Models.Tenant
+﻿@model ProjectManagement.Models.Personnel
 
 @{
     ViewBag.Title = "Index";
+    
+    var StatusListItems = new List<SelectListItem>();
+    StatusListItems.Add(new SelectListItem
+    {
+        Text = "Started",
+        Value = "Started"
+    });
+    StatusListItems.Add(new SelectListItem
+    {
+        Text = "In Progress",
+        Value = "In Progress",
+    });
+    StatusListItems.Add(new SelectListItem
+    {
+        Text = "Completed",
+        Value = "Completed",
+    });
 }
 
 <h2>Manager User Page for: @Model.Name</h2>
+
+<hr class="black" />
+
+            <h3>Your Projects:</h3>
+            <table class="table table-striped">
+
+                <tr>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Start Date</th>
+                    <th>Expected End Date</th>
+                    <th>Users</th>
+                </tr> 
+
+                @foreach (var item in Model.Projects) {
+
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Status</td>
+                        <td>@item.StartDate</td>
+                        <td>@item.ExpectedEndDate</td>
+                        <td>
+@*                            @foreach (var user in item.)
+                            {
+                            }*@
+                        </td>
+                    </tr>
+
+                }
+
+            </table>
+
+
+<hr class="black" />
+<h3>Add new Project</h3>
+
+@using (Html.BeginForm("AddProject", "Manager", FormMethod.Post, new { @class = "form-verticle", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    <fieldset>
+            @Html.Hidden("TenantId", Model.TenantId)
+            
+            <div class="form-group">
+            
+            <div class="control-label">Project Name</div>
+            @Html.TextBox("Name", "Project-", new { @class = "form-control" })
+
+            </div>
+            <div class="form-group">
+
+            <div class="control-label">Start Date</div>
+            Day:@Html.TextBox("StartDateDay","1", new { @class = "form-control"}) Month:@Html.TextBox("StartDateMonth","1", new { @class = "form-control"}) Year:@Html.TextBox("StartDateYear","2014", new { @class = "form-control"})
+            
+            </div>
+            <div class="form-group">
+
+            <div class="control-label">Expected End Date</div>
+            Day:@Html.TextBox("EndDateDay","1", new { @class = "form-control"}) Month:@Html.TextBox("EndDateMonth","2", new { @class = "form-control"}) Year:@Html.TextBox("EndDateYear","2014", new { @class = "form-control"})
+            
+            </div>
+
+        <div class="form-group">
+            <div class="control-label">Project Status</div>
+                        @Html.DropDownList("status", StatusListItems, "-- Select Project Status--", new { @class = "form-control" })
+                </div>
+
+            <div class="control-label">Choose Users</div>
+
+            @foreach (ProjectManagement.Models.Personnel user in ViewBag.Users)
+            {
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="Users">@user.Name
+                    </label>
+                </div>
+            }
+
+        @Html.Hidden("managerId", Model.Id)
+
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary form-control" value="Add Project" />
+        </div>
+    </fieldset>
+}
