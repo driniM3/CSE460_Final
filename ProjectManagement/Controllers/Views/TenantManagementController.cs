@@ -25,6 +25,7 @@ namespace ProjectManagement.Controllers.Views
             if (db.Personnels.Where(x => x.Id == User.Identity.Name).Single().Tenant.Name.ToLower() == tenant.ToLower())
             {
                 var t = db.Tenants.Where(x => x.Name == tenant).Single();
+                ViewBag.TenantRequirements = db.Requirements.Where(x => x.Personnel.TenantId == t.Id).ToList();
                 return View(t);
             }
             return RedirectToAction("NotFound", "Error");

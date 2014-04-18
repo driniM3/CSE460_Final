@@ -2,6 +2,88 @@
 
 @{
     ViewBag.Title = "Index";
+
+    var StatusListItems = new List<SelectListItem>();
+    StatusListItems.Add(new SelectListItem
+    {
+        Text = "Started",
+        Value = "Started"
+    });
+    StatusListItems.Add(new SelectListItem
+    {
+        Text = "In Progress",
+        Value = "In Progress",
+    });
+    StatusListItems.Add(new SelectListItem
+    {
+        Text = "Completed",
+        Value = "Completed",
+    });
+    
 }
 
-<h2>User Page For: @Model.Name</h2>
+<h2>User Page For: @ViewBag.Username</h2>
+
+<hr class="black" />
+
+<h3>Assigned Requirements</h3>
+
+<br />
+
+@if (ViewBag.UserRequirements.Count == 0)
+{
+    <div class="row">
+        <div class="col-md-12" style="vertical-align: middle">No Requirements Currently Assigned</div>
+    </div>
+}
+else
+{
+    
+    <div class="row">
+    <div class="col-md-1" style="vertical-align: middle">Id</div>
+    <div class="col-md-1" style="vertical-align: middle">Name</div>
+    <div class="col-md-3" style="vertical-align: middle">Description</div>
+    <div class="col-md-1" style="vertical-align: middle">Type</div>
+    <div class="col-md-1" style="vertical-align: middle">Time</div>
+    <div class="col-md-2" style="vertical-align: middle">Status</div>
+    <div class="col-md-1" style="vertical-align: middle">ProjectId</div>
+    <div class="col-md-2" style="vertical-align: middle">ProjectName</div>
+    </div>
+    
+    foreach (ProjectManagement.Models.Requirement requirement in ViewBag.UserRequirements) {
+                 <div class="row">
+                     <div class="col-md-1" style="vertical-align: middle">@requirement.Id</div>
+                     <div class="col-md-1" style="vertical-align: middle">@requirement.Name</div>
+                     <div class="col-md-3" style="vertical-align: middle">@requirement.Description</div>
+                     <div class="col-md-1" style="vertical-align: middle">@requirement.Type</div>
+                     <div class="col-md-1" style="vertical-align: middle">@requirement.Time</div>
+
+
+                     <div class="col-md-2" style="vertical-align: middle">
+                         @using (Html.BeginForm("EditRequirementStatus", "User", FormMethod.Post, new { @class = "form-verticle", role = "form" }))
+                         {
+                             <div class="form-group">
+                                 <fieldset>
+                                     @Html.Hidden("requirementId", requirement.Id)
+                                     @Html.DropDownList("newStatus", StatusListItems, requirement.Status, new { @class = "form-control" })
+                                     <input type="submit" class="btn btn-primary form-control" value="Change" />
+                                 </fieldset>
+                             </div>
+                         }
+                     </div>
+
+
+                     @if (requirement.RequirementsProjects.Count > 0)
+                     {
+                         <div class="col-md-1" style="vertical-align: middle">@requirement.RequirementsProjects.Where(x => x.RequirementId == requirement.Id).Single().Project.Id</div>
+                         <div class="col-md-2" style="vertical-align: middle">@requirement.RequirementsProjects.Where(x => x.RequirementId == requirement.Id).Single().Project.Name</div>
+                     }
+                     else
+                     {
+                         <div class="col-md-1" style="vertical-align: middle">None</div>
+                         <div class="col-md-2" style="vertical-align: middle">None</div>
+                     }                                 
+                </div>
+    }
+    
+}
