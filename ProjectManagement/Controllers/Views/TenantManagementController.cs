@@ -117,7 +117,18 @@ namespace ProjectManagement.Controllers.Views
 
             }
             return RedirectToAction("Index", new { });
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddLogo(string tenantId, string logoUrl)
+        {
+            if (tenantId != null && logoUrl != null)
+            {
+                int Id = Convert.ToInt32(tenantId);
+                var tenant = db.Tenants.Where(x => x.Id == model.Id).Single();
+            }
+            return RedirectToAction("Index", new { });
         }
     }
 }
