@@ -90,6 +90,14 @@ namespace ProjectManagement.Controllers.Views
             {
                 int Id = Convert.ToInt32(tenantId);
                 var tenant = db.Tenants.Where(x => x.Id == Id).Single();
+
+                tenant.Logo = logoUrl;
+
+                db.Tenants.Attach(tenant);
+                db.Entry(tenant).State = System.Data.EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Index", new { });
             }
             return RedirectToAction("Index", new { });
         }
