@@ -65,6 +65,24 @@ namespace ProjectManagement.Controllers.Views
             db.Projects.Add(project);
             db.SaveChanges();
 
+            IEnumerable<Personnel> usersForProject = db.Personnels.Where(x => users.Contains(x.Name));
+
+            foreach (Personnel person in usersForProject)
+            {
+                var projectPersonnel = new ProjectPersonnel
+                {
+                    Personnel = person,
+                    Project = project
+                };
+
+                db.ProjectPersonnels.Add(projectPersonnel);
+
+                project.ProjectPersonnels.Add(projectPersonnel);
+            }
+
+            db.Entry(project).State = System.Data.EntityState.Modified;
+            db.SaveChanges();
+
             return RedirectToAction("Index", new { });
         }
 
