@@ -44,9 +44,11 @@
                         <td>@item.StartDate</td>
                         <td>@item.ExpectedEndDate</td>
                         <td>
-@*                            @foreach (var user in item.)
+                            @foreach (ProjectManagement.Models.ProjectPersonnel projectPersonnel in item.ProjectPersonnels)
                             {
-                            }*@
+                                    @projectPersonnel.Personnel.Name
+                                <br/>
+                            }
                         </td>
                     </tr>
 
@@ -95,7 +97,7 @@
             {
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="Users">@user.Name
+                        <input type="checkbox" name="Users" value="@user.Name">@user.Name
                     </label>
                 </div>
             }
