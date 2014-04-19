@@ -17,7 +17,8 @@ namespace ProjectManagement.DataProviders
                 return new TenantModel { 
                     id = t.Id,
                     Name = t.Name,
-                    Style = t.Style
+                    Style = t.Style,
+                    Logo = t.Logo
                 };
             }
             else

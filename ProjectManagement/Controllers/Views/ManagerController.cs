@@ -49,8 +49,8 @@ namespace ProjectManagement.Controllers.Views
         public ActionResult AddProject(String TenantId, String Name, String StartDateDay, String StartDateMonth, String StartDateYear, String EndDateDay, String EndDateMonth, String EndDateYear, String status, String managerId, IEnumerable<String> users)
         {
 
-            DateTime StartDate = Convert.ToDateTime(String.Format("{0}/{1}/{2}", StartDateDay, StartDateMonth, StartDateYear));
-            DateTime EndDate = Convert.ToDateTime(String.Format("{0}/{1}/{2}", EndDateDay, EndDateMonth, EndDateYear));
+            DateTime StartDate = Convert.ToDateTime(String.Format("{0}/{1}/{2}", StartDateMonth, StartDateDay, StartDateYear));
+            DateTime EndDate = Convert.ToDateTime(String.Format("{0}/{1}/{2}", EndDateMonth, EndDateDay, EndDateYear));
 
             var project = new Project
             {
