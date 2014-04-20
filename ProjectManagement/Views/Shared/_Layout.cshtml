@@ -55,11 +55,12 @@
         <div class="container-fluid" >
             <div class="row-fluid" >
                 <div class="span2" >
-                  @if (tenant.Logo != null)
-                  {
-                    <img src="@tenant.Logo" alt="" height="128" width="128" onerror='this.style.display="none"'  />
-                  }
-                </div>
+                    <div style="position: relative" >
+                        @if (tenant.Logo != null)
+                        {
+                            <img src="@tenant.Logo" alt="" height="128" width="128" onerror='this.style.display="none"' style="position:absolute; top: 0; left: 0;" />
+                        }
+                    </div>
                 <div class="span10" >
                   @RenderBody()
                 </div>
