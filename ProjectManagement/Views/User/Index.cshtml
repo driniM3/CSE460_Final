@@ -1,89 +1,118 @@
-﻿@model ProjectManagement.Models.Tenant
+﻿@model ProjectManagement.Models.Personnel
 
-@{
-    ViewBag.Title = "Index";
-
-    var StatusListItems = new List<SelectListItem>();
-    StatusListItems.Add(new SelectListItem
-    {
-        Text = "Started",
-        Value = "Started"
-    });
-    StatusListItems.Add(new SelectListItem
-    {
-        Text = "In Progress",
-        Value = "In Progress",
-    });
-    StatusListItems.Add(new SelectListItem
-    {
-        Text = "Completed",
-        Value = "Completed",
-    });
-    
-}
-
-<h2>User Page For: @ViewBag.Username</h2>
-
-<hr class="black" />
-
-<h3>Assigned Requirements</h3>
-
-<br />
-
-@if (ViewBag.UserRequirements.Count == 0)
-{
-    <div class="row">
-        <div class="col-md-12" style="vertical-align: middle">No Requirements Currently Assigned</div>
+<div class="row">
+    <div class="col-md-12">
+        <h2>User Page For: @Model.Name</h2>
     </div>
-}
-else
-{
-    
-    <div class="row">
-    <div class="col-md-1" style="vertical-align: middle">Id</div>
-    <div class="col-md-1" style="vertical-align: middle">Name</div>
-    <div class="col-md-3" style="vertical-align: middle">Description</div>
-    <div class="col-md-1" style="vertical-align: middle">Type</div>
-    <div class="col-md-1" style="vertical-align: middle">Time</div>
-    <div class="col-md-2" style="vertical-align: middle">Status</div>
-    <div class="col-md-1" style="vertical-align: middle">ProjectId</div>
-    <div class="col-md-2" style="vertical-align: middle">ProjectName</div>
-    </div>
-    
-    foreach (ProjectManagement.Models.Requirement requirement in ViewBag.UserRequirements) {
-                 <div class="row">
-                     <div class="col-md-1" style="vertical-align: middle">@requirement.Id</div>
-                     <div class="col-md-1" style="vertical-align: middle">@requirement.Name</div>
-                     <div class="col-md-3" style="vertical-align: middle">@requirement.Description</div>
-                     <div class="col-md-1" style="vertical-align: middle">@requirement.Type</div>
-                     <div class="col-md-1" style="vertical-align: middle">@requirement.Time</div>
+</div>
 
-
-                     <div class="col-md-2" style="vertical-align: middle">
-                         @using (Html.BeginForm("EditRequirementStatus", "User", FormMethod.Post, new { @class = "form-verticle", role = "form" }))
-                         {
-                             <div class="form-group">
-                                 <fieldset>
-                                     @Html.Hidden("requirementId", requirement.Id)
-                                     @Html.DropDownList("newStatus", StatusListItems, requirement.Status, new { @class = "form-control" })
-                                     <input type="submit" class="btn btn-primary form-control" value="Change" />
-                                 </fieldset>
-                             </div>
-                         }
-                     </div>
-
-
-                     @if (requirement.RequirementsProjects.Count > 0)
-                     {
-                         <div class="col-md-1" style="vertical-align: middle">@requirement.RequirementsProjects.Where(x => x.RequirementId == requirement.Id).Single().Project.Id</div>
-                         <div class="col-md-2" style="vertical-align: middle">@requirement.RequirementsProjects.Where(x => x.RequirementId == requirement.Id).Single().Project.Name</div>
-                     }
-                     else
-                     {
-                         <div class="col-md-1" style="vertical-align: middle">None</div>
-                         <div class="col-md-2" style="vertical-align: middle">None</div>
-                     }                                 
+<div class="row">
+    <div class="col-md-12">
+        <div class="well">
+            <h3>Your Projects</h3>
+            @if (Model.ProjectPersonnels.Count == 0)
+            {
+                <div class="row">
+                    <div class="col-md-12" style="vertical-align: middle">No Projects Assigned..</div>
                 </div>
-    }
+            }
+            else
+            {
     
-}
+                <div class="row">
+                    <div class="col-md-4" style="vertical-align: middle">Name</div>
+                    <div class="col-md-2" style="vertical-align: middle">Start Date</div>
+                    <div class="col-md-2" style="vertical-align: middle">End Date</div>
+                    <div class="col-md-2" style="vertical-align: middle">Status</div>
+                    <div class="col-md-2" style="vertical-align: middle">Manager</div>
+                </div>
+    
+                foreach (var i in Model.ProjectPersonnels)
+                {
+                <div class="row">
+                    <div class="col-md-4" style="vertical-align: middle">@i.Project.Name</div>
+                    <div class="col-md-2" style="vertical-align: middle">@i.Project.StartDate.ToString().Split(' ').First()</div>
+                    <div class="col-md-2" style="vertical-align: middle">@i.Project.ExpectedEndDate.ToString().Split(' ').First()</div>
+                    <div class="col-md-2" style="vertical-align: middle">@i.Project.Status</div>
+                    <div class="col-md-2" style="vertical-align: middle">@i.Project.Personnel.Name</div>
+                </div>
+                }
+
+            }
+            <hr />
+            <h3>Your Requirements</h3>
+            @if (Model.Requirements.Count == 0)
+            {
+                <div class="row">
+                    <div class="col-md-12" style="vertical-align: middle">No Requirements Currently Assigned</div>
+                </div>
+            }
+            else
+            {
+    
+                <div class="row">
+                    <div class="col-md-3" style="vertical-align: middle">Name</div>
+                    <div class="col-md-2" style="vertical-align: middle">Type</div>
+                    <div class="col-md-2" style="vertical-align: middle">Time</div>
+                    <div class="col-md-2" style="vertical-align: middle">Status</div>
+                    <div class="col-md-3" style="vertical-align: middle">ProjectName</div>
+                </div>
+    
+                foreach (ProjectManagement.Models.Requirement requirement in Model.Requirements)
+                {
+                <div class="row">
+                    <div class="col-md-3" style="vertical-align: middle">@Html.ActionLink(requirement.Name, "Requirement", new { requirementId = requirement.Id })</div>
+                    <div class="col-md-2" style="vertical-align: middle">@requirement.Type</div>
+                    <div class="col-md-2" style="vertical-align: middle">@requirement.Time</div>
+                    <div class="col-md-2" style="vertical-align: middle">@requirement.Status</div>
+                    <div class="col-md-2" style="vertical-align: middle">@requirement.Project.Name</div>
+                </div>
+                }
+
+            }
+            <hr />
+            <h3>Your Summary</h3>
+            <div class="row">
+                <div class="col-md-5">
+                    <b>Total Projects: </b>
+                </div>
+                <div class="col-md-7">
+                    @Model.ProjectPersonnels.Count() Projects
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <b>Total Requirements: </b>
+                </div>
+                <div class="col-md-7">
+                    @Model.Requirements.Count() Requirements
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <b>Non Started Requirements: </b>
+                </div>
+                <div class="col-md-7">
+                   @Model.Requirements.Where(x => x.Status == "Not Started").Count() => @Model.Requirements.Where(x => x.Status == "Not Started").Select(x => x.Time).Sum() Hours
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <b>In Progress Requirements: </b>
+                </div>
+                <div class="col-md-7">
+                   @Model.Requirements.Where(x => x.Status == "In Progress").Count() => @Model.Requirements.Where(x => x.Status == "In Progress").Select(x => x.Time).Sum() Hours
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <b>Finished Requirements: </b>
+                </div>
+                <div class="col-md-7">
+                   @Model.Requirements.Where(x => x.Status == "Finished").Count() => @Model.Requirements.Where(x => x.Status == "Finished").Select(x => x.Time).Sum() Hours
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

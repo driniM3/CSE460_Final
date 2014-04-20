@@ -189,7 +189,7 @@
     <Compile Include="Controllers\Views\ManagerController.cs" />
     <Compile Include="Controllers\Views\TenantManagementController.cs" />
     <Compile Include="Controllers\Views\UserController.cs" />
-    <Compile Include="DataProviders\TenantProvider.cs" />
+    <Compile Include="DataProviders\SecurityProvider.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -222,13 +222,9 @@
     <Compile Include="Models\Requirement.cs">
       <DependentUpon>PMModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RequirementsProject.cs">
-      <DependentUpon>PMModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Tenant.cs">
       <DependentUpon>PMModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TenantModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -385,6 +381,10 @@
     <Content Include="Views\Manager\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Manager\Project.cshtml" />
+    <Content Include="Views\Manager\Requirement.cshtml" />
+    <Content Include="Views\TenantManagement\Project.cshtml" />
+    <Content Include="Views\TenantManagement\Requirement.cshtml" />
+    <Content Include="Views\User\Requirement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

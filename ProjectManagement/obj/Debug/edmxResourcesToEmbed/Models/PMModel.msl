@@ -43,14 +43,6 @@
           <ScalarProperty Name="Time" ColumnName="Time" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Assignee" ColumnName="Assignee" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="RequirementsProjects">
-      <EntityTypeMapping TypeName="ProjectManagementDBModel.RequirementsProject">
-        <MappingFragment StoreEntitySet="RequirementsProjects">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="RequirementId" ColumnName="RequirementId" />
           <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
         </MappingFragment>
       </EntityTypeMapping>

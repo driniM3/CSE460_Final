@@ -1,0 +1,119 @@
+﻿@model ProjectManagement.Models.Project
+
+@{
+    ViewBag.Title = "Project";
+}
+<div class="row">
+    <div class="col-md-12">
+        <h2>Project: @Model.Name</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="well">
+            <h3>Project Requirements</h3>
+            <div class="row">
+                <div class="col-md-3" style="vertical-align: middle"><b>Name</b></div>
+                <div class="col-md-2" style="vertical-align: middle"><b>Type</b></div>
+                <div class="col-md-1" style="vertical-align: middle"><b>Time</b></div>
+                <div class="col-md-2" style="vertical-align: middle"><b>Status</b></div>
+                <div class="col-md-2" style="vertical-align: middle"><b>Project Name</b></div>
+                <div class="col-md-2" style="vertical-align: middle"><b>Assignee</b></div>
+            </div>
+            @if (Model.Requirements.Any())
+            {
+                foreach (var requirement in Model.Requirements)
+                {
+                <div class="row">
+                    <div class="col-md-3" style="vertical-align: middle">@Html.ActionLink(requirement.Name, "Requirement", new { requirementId = requirement.Id })</div>
+                    <div class="col-md-2" style="vertical-align: middle">@requirement.Type</div>
+                    <div class="col-md-1" style="vertical-align: middle">@requirement.Time</div>
+                    <div class="col-md-2" style="vertical-align: middle">@requirement.Status</div>
+                    <div class="col-md-2" style="vertical-align: middle">@requirement.Project.Name</div>
+                    <div class="col-md-2" style="vertical-align: middle">@requirement.Personnel.Name</div>
+                </div>
+                }
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col-md-12"><b>No Requirements...</b></div>
+                </div>   
+            }
+            <hr />
+            <h3>Summary</h3>
+            <div class="row">
+                <div class="col-md-5">
+                    <b>Start Date: </b>
+                </div>
+                <div class="col-md-7">
+                    @Model.StartDate.ToString().Split(' ').First()
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <b>Expected End Date: </b>
+                </div>
+                <div class="col-md-7">
+                    @Model.ExpectedEndDate.ToString().Split(' ').First()
+                </div>
+            </div>
+             <div class="row">
+                <div class="col-md-5">
+                    <b>Non Started Requirements: </b>
+                </div>
+                <div class="col-md-7">
+                   @Model.Requirements.Where(x => x.Status == "Not Started").Count() => @Model.Requirements.Where(x => x.Status == "Not Started").Select(x => x.Time).Sum() Hours
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <b>In Progress Requirements: </b>
+                </div>
+                <div class="col-md-7">
+                   @Model.Requirements.Where(x => x.Status == "In Progress").Count() => @Model.Requirements.Where(x => x.Status == "In Progress").Select(x => x.Time).Sum() Hours
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <b>Finished Requirements: </b>
+                </div>
+                <div class="col-md-7">
+                   @Model.Requirements.Where(x => x.Status == "Finished").Count() => @Model.Requirements.Where(x => x.Status == "Finished").Select(x => x.Time).Sum() Hours
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <b>Status: </b>
+                </div>
+                <div class="col-md-7">
+                    @Model.Status
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="well">
+            <h3>Manager: @Model.Personnel.Name</h3>
+
+            <h3>Workers</h3>
+            @if (Model.ProjectPersonnels.Count() > 0)
+            {
+                foreach (var i in Model.ProjectPersonnels)
+                {
+                <p>@i.Personnel.Name</p>
+                }
+            }
+            else
+            {
+                <p><b>No Employees...</b></p>
+            }
+
+            
+        </div>
+
+    </div>
+</div>
+

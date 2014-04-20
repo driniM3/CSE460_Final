@@ -1,7 +1,10 @@
 ﻿<!DOCTYPE html>
 @{
+    
     var t = this.ViewContext.RouteData.Values["tenant"].ToString();
-    var tenant = ProjectManagement.DataProviders.TenantProvider.getTenantStyle(t); 
+    var db = new ProjectManagement.Models.PMEntities();
+
+    var tenant = db.Tenants.Where(x => x.Name.ToLower() == t.ToLower()).Single();
 }
 <html lang="en">
 <head>
@@ -51,22 +54,22 @@
             </div>
         </div>
     </header>
-    <div class="container body-content" >
-        <div class="container-fluid" >
-            <div class="row-fluid" >
-                <div class="span2" >
-                    <div style="position: relative" >
+    <div class="container body-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2">
+                    <br />
                         @if (tenant.Logo != null)
                         {
-                            <img src="@tenant.Logo" alt="" height="128" width="128" onerror='this.style.display="none"' style="position:absolute; top: 0; left: 0;" />
+                            <img src="@tenant.Logo" alt="" height="128" width="128" onerror='this.style.display="none"' />
                         }
-                    </div>
-                <div class="span10" >
-                  @RenderBody()
+                </div>
+                <div class="col-md-10">
+                    @RenderBody()
                 </div>
             </div>
+            <hr />
         </div>
-        <hr />
     </div>
     <footer class="container">
         <p>&copy; @DateTime.Now.Year - Project Management SAAS</p>

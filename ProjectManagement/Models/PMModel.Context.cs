@@ -29,7 +29,6 @@ namespace ProjectManagement.Models
         public DbSet<ProjectPersonnel> ProjectPersonnels { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Requirement> Requirements { get; set; }
-        public DbSet<RequirementsProject> RequirementsProjects { get; set; }
         public DbSet<Tenant> Tenants { get; set; }
     }
 }

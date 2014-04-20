@@ -1,4 +1,5 @@
-﻿using ProjectManagement.Models;
+﻿using ProjectManagement.DataProviders;
+using ProjectManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Web.Mvc;
 
 namespace ProjectManagement.Controllers.Views
 {
-    [Authorize(Roles = "Tenant Manager, Manager, User")]
+    [Authorize(Roles = "User")]
     public class UserController : Controller
     {
         //
@@ -17,27 +18,43 @@ namespace ProjectManagement.Controllers.Views
 
         public ActionResult Index(string tenant)
         {
-            if (db.Personnels.Where(x => x.Id == User.Identity.Name).Single().Tenant.Name.ToLower() == tenant.ToLower())
+            if (SecurityProvider.tenantAuth(RouteData.Values["tenant"].ToString(), User.Identity.Name))
             {
-                Tenant ten = db.Tenants.Where(x => x.Name == tenant).Single();
-                ViewBag.Username = User.Identity.Name;
-                ViewBag.UserProjects = db.Projects.Where(x => x.ProjectPersonnels.Any(m => m.PersonnelId == User.Identity.Name)).ToList();
-                ViewBag.UserRequirements = db.Requirements.Where(x => x.Personnel.Name == User.Identity.Name).ToList();
-                return View(ten);
+                return View(db.Personnels.Where(x => x.Id == User.Identity.Name).Single());
             }
-            return RedirectToAction("NotFound", "Error");
+            else return RedirectToAction("NotFound", "Error");
         }
 
-        public ActionResult EditRequirementStatus(String requirementId, String newStatus)
+        public ActionResult Requirement(string tenant, int requirementId)
         {
-            int requirementIdInt = Convert.ToInt32(requirementId);
-            Requirement requirement = db.Requirements.Where(x => x.Id == requirementIdInt).Single();
+            if (SecurityProvider.tenantAuth(RouteData.Values["tenant"].ToString(), User.Identity.Name)
+                && SecurityProvider.userAuthFromRequirement(requirementId, User.Identity.Name))
+            {
+                var r = db.Requirements.Where(x => x.Id == requirementId).Single();
+                return View(r);
+            }
+            else return RedirectToAction("NotFound", "Error");
+        }
 
-            requirement.Status = newStatus;
-            db.Entry(requirement).State = System.Data.EntityState.Modified;
-            db.SaveChanges();
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditRequirementStatus(int requirementId, string Status)
+        {
+            if (SecurityProvider.tenantAuth(RouteData.Values["tenant"].ToString(), User.Identity.Name)
+                && SecurityProvider.userAuthFromRequirement(requirementId, User.Identity.Name))
+            {
+                var rS = db.Requirements.Where(x => x.Id == requirementId).Single();
+                rS.Status = Status;
+                //check to make sure personel is right
+                db.Requirements.Attach(rS);
+                db.Entry(rS).State = System.Data.EntityState.Modified;
+                db.SaveChanges();
 
-            return RedirectToAction("Index", new { });
+                return RedirectToAction("Index");
+            }
+            else return RedirectToAction("NotFound", "Error");
+
+            
         }
 
     }

@@ -1,0 +1,68 @@
+﻿@model ProjectManagement.Models.Requirement
+
+@{
+    ViewBag.Title = "Requirement";
+}
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h2>Project: @Model.Project.Name</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="well">
+            <h3>Edit Requirement</h3>
+            @using (Html.BeginForm("EditRequirementStatus", "User", FormMethod.Post, new { @class = "form-verticle", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary()
+
+                <div class="form-group">
+                    <label for="Name">Name:</label>
+                    <p>@Model.Name</p>
+                </div>
+                <div class="form-group">
+                    <label for="Description">Description:</label>
+                    <p>@Model.Description</p>
+                </div>
+                <div class="form-group">
+                    <label for="Type">Type:</label>
+                    <p>@Model.Type</p>
+                </div>
+                <div class="form-group">
+                    <label for="Time">Time:</label>
+                    <p>@Model.Time</p>
+                </div>
+                <div class="form-group">
+                    <label for="Status">Status:</label>
+                    <select name="Status" class="form-control">
+                        @if (Model.Status == "Not Started")
+                        {
+                            <option value="Not Started" selected>Not Started</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Finished">Finished</option>
+                        }else if (Model.Status == "In Progress")
+                        {
+                            <option value="Not Started">Not Started</option>
+                            <option value="In Progress" selected>In Progress</option>
+                            <option value="Finished">Finished</option>
+                        }else if (Model.Status == "Finished")
+                        {
+                            <option value="Not Started">Not Started</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Finished" selected>Finished</option>
+                        }
+                    </select>
+                </div>
+                @Html.Hidden("requirementId", Model.Id)
+
+                <div class="form-group">
+                    <input type="submit" value="Update Requirement" class="form-control btn btn-primary" />
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+

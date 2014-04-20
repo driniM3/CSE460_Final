@@ -5,17 +5,16 @@
     <EntitySet Name="ProjectPersonnels" EntityType="ProjectManagementDBModel.Store.ProjectPersonnels" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Projects" EntityType="ProjectManagementDBModel.Store.Projects" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Requirements" EntityType="ProjectManagementDBModel.Store.Requirements" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="RequirementsProjects" EntityType="ProjectManagementDBModel.Store.RequirementsProjects" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Tenants" EntityType="ProjectManagementDBModel.Store.Tenants" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK__Personnel__Tenan__2F10007B" Association="ProjectManagementDBModel.Store.FK__Personnel__Tenan__2F10007B">
       <End Role="Tenants" EntitySet="Tenants" />
       <End Role="Personnel" EntitySet="Personnel" />
     </AssociationSet>
-    <AssociationSet Name="FK__ProjectPe__Perso__5DCAEF64" Association="ProjectManagementDBModel.Store.FK__ProjectPe__Perso__5DCAEF64">
+    <AssociationSet Name="FK__ProjectPe__Perso__4AB81AF0" Association="ProjectManagementDBModel.Store.FK__ProjectPe__Perso__4AB81AF0">
       <End Role="Personnel" EntitySet="Personnel" />
       <End Role="ProjectPersonnels" EntitySet="ProjectPersonnels" />
     </AssociationSet>
-    <AssociationSet Name="FK__ProjectPe__Proje__5CD6CB2B" Association="ProjectManagementDBModel.Store.FK__ProjectPe__Proje__5CD6CB2B">
+    <AssociationSet Name="FK__ProjectPe__Proje__49C3F6B7" Association="ProjectManagementDBModel.Store.FK__ProjectPe__Proje__49C3F6B7">
       <End Role="Projects" EntitySet="Projects" />
       <End Role="ProjectPersonnels" EntitySet="ProjectPersonnels" />
     </AssociationSet>
@@ -31,13 +30,9 @@
       <End Role="Personnel" EntitySet="Personnel" />
       <End Role="Requirements" EntitySet="Requirements" />
     </AssociationSet>
-    <AssociationSet Name="FK__Requireme__Proje__35BCFE0A" Association="ProjectManagementDBModel.Store.FK__Requireme__Proje__35BCFE0A">
+    <AssociationSet Name="FK__Requireme__Proje__4BAC3F29" Association="ProjectManagementDBModel.Store.FK__Requireme__Proje__4BAC3F29">
       <End Role="Projects" EntitySet="Projects" />
-      <End Role="RequirementsProjects" EntitySet="RequirementsProjects" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Requireme__Requi__34C8D9D1" Association="ProjectManagementDBModel.Store.FK__Requireme__Requi__34C8D9D1">
       <End Role="Requirements" EntitySet="Requirements" />
-      <End Role="RequirementsProjects" EntitySet="RequirementsProjects" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Personnel">
@@ -80,13 +75,6 @@
     <Property Name="Time" Type="float" />
     <Property Name="Status" Type="varchar" MaxLength="50" />
     <Property Name="Assignee" Type="nvarchar" MaxLength="20" />
-  </EntityType>
-  <EntityType Name="RequirementsProjects">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="RequirementId" Type="int" Nullable="false" />
     <Property Name="ProjectId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Tenants">
@@ -110,7 +98,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ProjectPe__Perso__5DCAEF64">
+  <Association Name="FK__ProjectPe__Perso__4AB81AF0">
     <End Role="Personnel" Type="ProjectManagementDBModel.Store.Personnel" Multiplicity="1" />
     <End Role="ProjectPersonnels" Type="ProjectManagementDBModel.Store.ProjectPersonnels" Multiplicity="*" />
     <ReferentialConstraint>
@@ -122,7 +110,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ProjectPe__Proje__5CD6CB2B">
+  <Association Name="FK__ProjectPe__Proje__49C3F6B7">
     <End Role="Projects" Type="ProjectManagementDBModel.Store.Projects" Multiplicity="1" />
     <End Role="ProjectPersonnels" Type="ProjectManagementDBModel.Store.ProjectPersonnels" Multiplicity="*" />
     <ReferentialConstraint>
@@ -170,27 +158,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Requireme__Proje__35BCFE0A">
+  <Association Name="FK__Requireme__Proje__4BAC3F29">
     <End Role="Projects" Type="ProjectManagementDBModel.Store.Projects" Multiplicity="1" />
-    <End Role="RequirementsProjects" Type="ProjectManagementDBModel.Store.RequirementsProjects" Multiplicity="*" />
+    <End Role="Requirements" Type="ProjectManagementDBModel.Store.Requirements" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Projects">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="RequirementsProjects">
+      <Dependent Role="Requirements">
         <PropertyRef Name="ProjectId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Requireme__Requi__34C8D9D1">
-    <End Role="Requirements" Type="ProjectManagementDBModel.Store.Requirements" Multiplicity="1" />
-    <End Role="RequirementsProjects" Type="ProjectManagementDBModel.Store.RequirementsProjects" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Requirements">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="RequirementsProjects">
-        <PropertyRef Name="RequirementId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

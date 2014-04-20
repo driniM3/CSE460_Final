@@ -7,4 +7,5 @@
     [Time] FLOAT NULL, 
     [Status] VARCHAR(50) NULL,
     [Assignee] NVARCHAR(20) NULL REFERENCES PERSONNEL(Id), 
+    [ProjectId] INT NOT NULL REFERENCES PROJECTS(Id), 
 )

@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
-    
+
     var StatusListItems = new List<SelectListItem>();
     StatusListItems.Add(new SelectListItem
     {
@@ -21,91 +21,108 @@
     });
 }
 
-<h2>Manager User Page for: @Model.Name</h2>
+<div class="row">
+    <div class="col-md-12">
+        <h2>Manager Page for: @Model.Name</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="well">
 
-<hr class="black" />
-
-            <h3>Your Projects:</h3>
+            <h3>Projects:</h3>
             <table class="table table-striped">
 
                 <tr>
                     <th>Name</th>
                     <th>Status</th>
                     <th>Start Date</th>
-                    <th>Expected End Date</th>
-                    <th>Users</th>
-                </tr> 
+                    <th>End Date</th>
+                    <th>Workers</th>
+                    <th>Manager</th>
+                </tr>
 
-                @foreach (var item in Model.Projects) {
+                @foreach (var item in Model.Tenant.Projects)
+                {
 
                     <tr>
+                        @if(item.Personnel.Id == User.Identity.Name){
                         <td>@Html.ActionLink(item.Name, "Project", new { projectId = item.Id })</td>
+                        }else{
+                            <td>@item.Name</td>
+                        }
                         <td>@item.Status</td>
-                        <td>@item.StartDate</td>
-                        <td>@item.ExpectedEndDate</td>
+                        <td>@item.StartDate.ToString().Split(' ').First()</td>
+                        <td>@item.ExpectedEndDate.ToString().Split(' ').First()</td>
                         <td>
-                            @foreach (ProjectManagement.Models.ProjectPersonnel projectPersonnel in item.ProjectPersonnels)
-                            {
-                                    @projectPersonnel.Personnel.Name
-                                <br/>
-                            }
+                            @item.ProjectPersonnels.Count()
+                        </td>
+                        <td>
+                            @item.Personnel.Name
                         </td>
                     </tr>
 
                 }
 
             </table>
-
-
-<hr class="black" />
-<h3>Add new Project</h3>
-
-@using (Html.BeginForm("AddProject", "Manager", FormMethod.Post, new { @class = "form-verticle", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary()
-    <fieldset>
-            @Html.Hidden("TenantId", Model.TenantId)
-            
-            <div class="form-group">
-            
-            <div class="control-label">Project Name</div>
-            @Html.TextBox("Name", "Project-", new { @class = "form-control" })
-
-            </div>
-            <div class="form-group">
-
-            <div class="control-label">Start Date</div>
-            Day:@Html.TextBox("StartDateDay","1", new { @class = "form-control"}) Month:@Html.TextBox("StartDateMonth","1", new { @class = "form-control"}) Year:@Html.TextBox("StartDateYear","2014", new { @class = "form-control"})
-            
-            </div>
-            <div class="form-group">
-
-            <div class="control-label">Expected End Date</div>
-            Day:@Html.TextBox("EndDateDay","1", new { @class = "form-control"}) Month:@Html.TextBox("EndDateMonth","2", new { @class = "form-control"}) Year:@Html.TextBox("EndDateYear","2014", new { @class = "form-control"})
-            
-            </div>
-
-        <div class="form-group">
-            <div class="control-label">Project Status</div>
-                        @Html.DropDownList("status", StatusListItems, "-- Select Project Status--", new { @class = "form-control" })
-                </div>
-
-            <div class="control-label">Choose Users</div>
-
-            @foreach (ProjectManagement.Models.Personnel user in ViewBag.Users)
-            {
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" name="Users" value="@user.Name">@user.Name
-                    </label>
-                </div>
-            }
-
-        @Html.Hidden("managerId", Model.Id)
-
-        <div class="form-group">
-            <input type="submit" class="btn btn-primary form-control" value="Add Project" />
         </div>
-    </fieldset>
-}
+    </div>
+</div>
+<div class="row">
+        <div class="col-md-8 col-md-offset-2">
+        <div class="well">
+        <h3>Add new Project</h3>
+
+        @using (Html.BeginForm("AddProject", "Manager", FormMethod.Post, new { @class = "form-verticle", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+            <fieldset>
+                @Html.Hidden("TenantId", Model.TenantId)
+
+                <div class="form-group">
+
+                    <div class="control-label">Project Name</div>
+                    @Html.TextBox("Name", "Project-", new { @class = "form-control" })
+
+                </div>
+                <div class="form-group">
+
+                    <div class="control-label"><b>Start Date</b></div>
+                    Day:@Html.TextBox("StartDateDay", "1", new { @class = "form-control" }) Month:@Html.TextBox("StartDateMonth", "1", new { @class = "form-control" }) Year:@Html.TextBox("StartDateYear", "2014", new { @class = "form-control" })
+
+                </div>
+                <div class="form-group">
+
+                    <div class="control-label"><b>Expected End Date</b></div>
+                    Day:@Html.TextBox("EndDateDay", "1", new { @class = "form-control" }) Month:@Html.TextBox("EndDateMonth", "2", new { @class = "form-control" }) Year:@Html.TextBox("EndDateYear", "2014", new { @class = "form-control" })
+
+                </div>
+
+                <div class="form-group">
+                    <div class="control-label">Project Status</div>
+                    @Html.DropDownList("status", StatusListItems, "-- Select Project Status--", new { @class = "form-control" })
+                </div>
+
+                <div class="control-label">Choose Users</div>
+
+                @foreach (ProjectManagement.Models.Personnel user in ViewBag.Users)
+                {
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="Users" value="@user.Name">@user.Name
+                        </label>
+                    </div>
+                }
+
+                @Html.Hidden("managerId", Model.Id)
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary form-control" value="Add Project" />
+                </div>
+            </fieldset>
+        }
+            </div>
+    </div>
+
+</div>

@@ -22,7 +22,7 @@
                     <h2>Registration for: @ViewBag.tenant</h2>
                     <p>After Registering, you will be taken to a page to view projects</p>
                 }
-                <hr class="black" />
+                <hr />
                 @using (Html.BeginForm("Register", "Account",FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
                     @Html.AntiForgeryToken()

@@ -3,5 +3,223 @@
 @{
     ViewBag.Title = "Project";
 }
+<div class="row">
+    <div class="col-md-12">
+        <h2>Project: @Model.Name</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="well">
+            <h3>Project Requirements</h3>
+            <div class="row">
+                <div class="col-md-3" style="vertical-align: middle"><b>Name</b></div>
+                <div class="col-md-2" style="vertical-align: middle"><b>Type</b></div>
+                <div class="col-md-1" style="vertical-align: middle"><b>Time</b></div>
+                <div class="col-md-2" style="vertical-align: middle"><b>Status</b></div>
+                <div class="col-md-2" style="vertical-align: middle"><b>Project Name</b></div>
+                <div class="col-md-2" style="vertical-align: middle"><b>Assignee</b></div>
+            </div>
+            @if (Model.Requirements.Any())
+            {
+                foreach (var requirement in Model.Requirements)
+                {
+                <div class="row">
+                    <div class="col-md-3" style="vertical-align: middle">@Html.ActionLink(requirement.Name, "Requirement", new { requirementId = requirement.Id })</div>
+                    <div class="col-md-2" style="vertical-align: middle">@requirement.Type</div>
+                    <div class="col-md-1" style="vertical-align: middle">@requirement.Time</div>
+                    <div class="col-md-2" style="vertical-align: middle">@requirement.Status</div>
+                    <div class="col-md-2" style="vertical-align: middle">@requirement.Project.Name</div>
+                    <div class="col-md-2" style="vertical-align: middle">@requirement.Personnel.Name</div>
+                </div>
+                }
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col-md-12"><b>No Requirements...</b></div>
+                </div>   
+            }
+            <hr />
+            <h3>Summary</h3>
+            <div class="row">
+                <div class="col-md-5">
+                    <b>Start Date: </b>
+                </div>
+                <div class="col-md-7">
+                    @Model.StartDate.ToString().Split(' ').First()
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <b>Expected End Date: </b>
+                </div>
+                <div class="col-md-7">
+                    @Model.ExpectedEndDate.ToString().Split(' ').First()
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <b>Non Started Requirements: </b>
+                </div>
+                <div class="col-md-7">
+                   @Model.Requirements.Where(x => x.Status == "Not Started").Count() => @Model.Requirements.Where(x => x.Status == "Not Started").Select(x => x.Time).Sum() Hours
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <b>In Progress Requirements: </b>
+                </div>
+                <div class="col-md-7">
+                   @Model.Requirements.Where(x => x.Status == "In Progress").Count() => @Model.Requirements.Where(x => x.Status == "In Progress").Select(x => x.Time).Sum() Hours
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <b>Finished Requirements: </b>
+                </div>
+                <div class="col-md-7">
+                   @Model.Requirements.Where(x => x.Status == "Finished").Count() => @Model.Requirements.Where(x => x.Status == "Finished").Select(x => x.Time).Sum() Hours
+                </div>
+            </div>
+            <div class="row">
+                @using (Html.BeginForm("EditProjectStatus", "Manager", FormMethod.Post, new { @class = "form-verticle", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary()
+                    <div class="col-md-5">
+                        <b>Status: </b>
+                    </div>
+                    <div class="col-md-4">
+                        <select name="Status" class="form-control">
+                            @if (Model.Status == "Started")
+                            {
+                                <option value="Started" selected>Started</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Completed">Completed</option>
+                            }
+                            else if (Model.Status == "In Progress")
+                            {
+                                <option value="Started">Started</option>
+                                <option value="In Progress" selected>In Progress</option>
+                                <option value="Completed">Completed</option>
+                            }
+                            else if (Model.Status == "Completed")
+                            {
+                                <option value="Started">Started</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Completed" selected>Completed</option>
+                            }
+                        </select>
+                    </div>
+                    @Html.Hidden("projectId", @Model.Id)
+                    <div class="col-md-3">
+                        <input type="submit" value="Update" class="btn btn-primary form-control" />
+                    </div>
+                    
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="well">
+            <h3>Manager: @Model.Personnel.Name</h3>
 
-<h2>Project: @Model.Name</h2>
+            <h3>Workers</h3>
+            @if (Model.ProjectPersonnels.Count() > 0)
+            {
+                foreach (var i in Model.ProjectPersonnels)
+                {
+                <p>@i.Personnel.Name</p>
+                }
+            }
+            else
+            {
+                <p><b>No Employees...</b></p>
+            }
+
+            <hr />
+
+            <h3>Add Employee to Project</h3>
+
+            @if (Model.Tenant.Personnels.Where(x => x.Type == "User" && !Model.ProjectPersonnels.Any(c => c.PersonnelId == x.Id)).Any())
+            {
+
+                using (Html.BeginForm("AddEmployeeToProject", "Manager", FormMethod.Post, new { @class = "form-verticle", role = "form" }))
+                {
+                @Html.Hidden("projectId", Model.Id)
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary()
+                <div class="form-group">
+                    <select name="employee" class="form-control">
+                        @foreach (var i in Model.Tenant.Personnels.Where(x => x.Type == "User" && !Model.ProjectPersonnels.Any(c => c.PersonnelId == x.Id)))
+                        {
+                            <option value="@i.Id">@i.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary form-control" value="Add User" />
+                </div>                    
+                }
+            }
+            else
+            {
+                <p>No more users available to add</p>   
+            }
+        </div>
+
+    </div>
+    <div class="col-md-6">
+        <div class="well">
+            <h3>Add Requirement</h3>
+            @using (Html.BeginForm("AddRequirementToProject", "Manager", FormMethod.Post, new { @class = "form-verticle", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary()
+
+                <div class="form-group">
+                    <label for="Name">Name:</label>
+                    <input type="text" name="Name" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="Description">Description:</label>
+                    <textarea name="Description" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="Type">Type:</label>
+                    <input type="text" name="Type" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="Time">Time (Enter as double):</label>
+                    <input type="text" name="Time" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="Status">Status:</label>
+                    <select name="Status" class="form-control">
+                        <option value="Not Started">Not Started</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Finished">Finished</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Assignee">Assignee:</label>
+                    <select name="Assignee" class="form-control">
+                        @foreach (var i in Model.ProjectPersonnels.Where(x => x.Personnel.Type == "User"))
+                        {
+                            <option value="@i.Personnel.Id">@i.Personnel.Name</option>
+                        }
+                    </select>
+                </div>
+                @Html.Hidden("ProjectId", Model.Id)
+
+                <div class="form-group">
+                    <input type="submit" value="Add Requirement" class="form-control btn btn-primary" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

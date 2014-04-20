@@ -5,14 +5,14 @@
     var listItems = new List<SelectListItem>();
     listItems.Add(new SelectListItem
         {
-          Text = "Manager",
-          Value = "Manager"
+            Text = "Manager",
+            Value = "Manager"
         });
-   listItems.Add(new SelectListItem
-        {
-            Text = "User",
-            Value = "User",
-        });
+    listItems.Add(new SelectListItem
+         {
+             Text = "User",
+             Value = "User",
+         });
 }
 
 <div class="row">
@@ -23,12 +23,12 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-6">
         <div class="well">
             <h3>Manage Tenant: @Model.Name</h3>
             <p>Use The Form Below to customize your tenant application</p>
 
-            <hr class="black" />
+            <hr />
 
             @using (Html.BeginForm("EditTenant", "TenantManagement", FormMethod.Post, new { @class = "form-verticle", role = "form" }))
             {
@@ -42,41 +42,41 @@
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.Style, new { @class = "control-label" })
-                            <select name="Style" class="form-control">
-                                <option value="bootstrap.min.css" @if (Model.Style == "bootstrap.min.css")
-                                                                 { <text>selected</text>}>Default</option>
-                                <option value="amelia.bootstrap.min.css" @if (Model.Style == "amelia.bootstrap.min.css")
-                                                                        { <text>selected</text>}>Amelia</option>
-                                <option value="cerulean.bootstrap.min.css" @if (Model.Style == "cerulean.bootstrap.min.css")
-                                                                          { <text>selected</text>}>Cerulean</option>
-                                <option value="cosmo.bootstrap.min.css" @if (Model.Style == "cosmo.bootstrap.min.css")
-                                                                       { <text>selected</text>}>Cosmo</option>
-                                <option value="cyborg.bootstrap.min.css" @if (Model.Style == "cyborg.bootstrap.min.css")
-                                                                       { <text>selected</text>}>Cyborg</option>
-                                <option value="darkly.bootstrap.min.css" @if (Model.Style == "darkly.bootstrap.min.css")
-                                                                 { <text>selected</text>}>Darkly</option>
-                                <option value="flatly.bootstrap.min.css" @if (Model.Style == "flatly.bootstrap.min.css")
-                                                                 { <text>selected</text>}>Flatly</option>
-                                <option value="journal.bootstrap.min.css" @if (Model.Style == "journal.bootstrap.min.css")
-                                                                 { <text>selected</text>}>Journal</option>
-                                <option value="lumen.bootstrap.min.css" @if (Model.Style == "lumen.bootstrap.min.css")
-                                                                 { <text>selected</text>}>Lumen</option>
-                                <option value="readable.bootstrap.min.css" @if (Model.Style == "readable.bootstrap.min.css")
-                                                                 { <text>selected</text>}>Readable</option>
-                                <option value="simplex.bootstrap.min.css" @if (Model.Style == "simplex.bootstrap.min.css")
-                                                                 { <text>selected</text>}>Simplex</option>
-                                <option value="slate.bootstrap.min.css" @if (Model.Style == "slate.bootstrap.min.css")
-                                                                 { <text>selected</text>}>Slate</option>
-                                <option value="spacelab.bootstrap.min.css" @if (Model.Style == "spacelab.bootstrap.min.css")
-                                                                 { <text>selected</text>}>SpaceLab</option>
-                                <option value="superhero.bootstrap.min.css" @if (Model.Style == "superhero.bootstrap.min.css")
-                                                                 { <text>selected</text>}>Superhero</option>
-                                <option value="united.bootstrap.min.css" @if (Model.Style == "united.bootstrap.min.css")
-                                                                 { <text>selected</text>}>United</option>
-                                <option value="yeti.bootstrap.min.css" @if (Model.Style == "yeti.bootstrap.min.css")
-                                                                 { <text>selected</text>}>Yeti</option>                                
+                        <select name="Style" class="form-control">
+                            <option value="bootstrap.min.css" @if (Model.Style == "bootstrap.min.css")
+                                                              { <text>selected</text>}>Default</option>
+                            <option value="amelia.bootstrap.min.css" @if (Model.Style == "amelia.bootstrap.min.css")
+                                                                     { <text>selected</text>}>Amelia</option>
+                            <option value="cerulean.bootstrap.min.css" @if (Model.Style == "cerulean.bootstrap.min.css")
+                                                                       { <text>selected</text>}>Cerulean</option>
+                            <option value="cosmo.bootstrap.min.css" @if (Model.Style == "cosmo.bootstrap.min.css")
+                                                                    { <text>selected</text>}>Cosmo</option>
+                            <option value="cyborg.bootstrap.min.css" @if (Model.Style == "cyborg.bootstrap.min.css")
+                                                                     { <text>selected</text>}>Cyborg</option>
+                            <option value="darkly.bootstrap.min.css" @if (Model.Style == "darkly.bootstrap.min.css")
+                                                                     { <text>selected</text>}>Darkly</option>
+                            <option value="flatly.bootstrap.min.css" @if (Model.Style == "flatly.bootstrap.min.css")
+                                                                     { <text>selected</text>}>Flatly</option>
+                            <option value="journal.bootstrap.min.css" @if (Model.Style == "journal.bootstrap.min.css")
+                                                                      { <text>selected</text>}>Journal</option>
+                            <option value="lumen.bootstrap.min.css" @if (Model.Style == "lumen.bootstrap.min.css")
+                                                                    { <text>selected</text>}>Lumen</option>
+                            <option value="readable.bootstrap.min.css" @if (Model.Style == "readable.bootstrap.min.css")
+                                                                       { <text>selected</text>}>Readable</option>
+                            <option value="simplex.bootstrap.min.css" @if (Model.Style == "simplex.bootstrap.min.css")
+                                                                      { <text>selected</text>}>Simplex</option>
+                            <option value="slate.bootstrap.min.css" @if (Model.Style == "slate.bootstrap.min.css")
+                                                                    { <text>selected</text>}>Slate</option>
+                            <option value="spacelab.bootstrap.min.css" @if (Model.Style == "spacelab.bootstrap.min.css")
+                                                                       { <text>selected</text>}>SpaceLab</option>
+                            <option value="superhero.bootstrap.min.css" @if (Model.Style == "superhero.bootstrap.min.css")
+                                                                        { <text>selected</text>}>Superhero</option>
+                            <option value="united.bootstrap.min.css" @if (Model.Style == "united.bootstrap.min.css")
+                                                                     { <text>selected</text>}>United</option>
+                            <option value="yeti.bootstrap.min.css" @if (Model.Style == "yeti.bootstrap.min.css")
+                                                                   { <text>selected</text>}>Yeti</option>
 
-                            </select>
+                        </select>
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary form-control" value="Update Tenant" />
@@ -84,27 +84,35 @@
                 </fieldset>
             }
 
-            <hr class="black" />
+            <hr />
 
-            <h3>Your Logo:</h3>
+            <h3>Tenant Logo:</h3>
             @using (Html.BeginForm("AddLogo", "TenantManagement", FormMethod.Post, new { @class = "form-verticle", role = "form" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary()
-                <div class="form-group">
-                    <fieldset>
-                        @Html.Hidden("tenantId", Model.Id)
-                        <div class="control-label">Logo URL</div>
-                        @Html.TextBox("logoUrl", "", new { @class = "form-control" })
+                <fieldset>
+                    @Html.Hidden("tenantId", Model.Id)
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Logo, new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.Logo, new { @class = "form-control" })
+                    </div>
+
+
+                    <div class="form-group">
                         <input type="submit" class="btn btn-primary form-control" value="Add Logo" />
-                    </fieldset>
-                </div>
+                    </div>
+
+                </fieldset>
             }
-            
 
-            <hr class="black" />
 
-            <h3>Your Users:</h3>
+
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="well">
+            <h3>Tenant Users:</h3>
             <div class="row">
                 <div class="col-md-6">
                     <b>Name</b>
@@ -114,32 +122,33 @@
                 </div>
             </div>
 
-                @foreach (var item in Model.Personnels) {
+            @foreach (var item in Model.Personnels)
+            {
 
                 <div class="row">
                     <div class="col-md-6" style="vertical-align: middle">@item.Name</div>
-                    <div class="col-md-6" style="vertical-align: middle">@item.Type</div>                                      
+                    <div class="col-md-6" style="vertical-align: middle">@item.Type</div>
                 </div>
 
-                }
+            }
 
 
-            <hr class="black" />
+            <hr />
 
             @using (Html.BeginForm("AddUser", "TenantManagement", FormMethod.Post, new { @class = "form-verticle", role = "form" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary()
                 <fieldset>
-                   <div class="form-group">
-                       @Html.Hidden("tenantId", Model.Id)
+                    <div class="form-group">
+                        @Html.Hidden("tenantId", Model.Id)
                         <div class="control-label">Username</div>
                         @Html.TextBox("username", "", new { @class = "form-control" })
-                       <div class="control-label">Password</div>
-                        @Html.TextBox("password", "", new { @class = "form-control", @type="password" })
-                       <div class="control-label">Confirm Password</div>
-                        @Html.TextBox("passwordConfirm","", new { @class = "form-control", @type="password" })
-                       <div class="control-label">User Type</div>
+                        <div class="control-label">Password</div>
+                        @Html.TextBox("password", "", new { @class = "form-control", @type = "password" })
+                        <div class="control-label">Confirm Password</div>
+                        @Html.TextBox("passwordConfirm", "", new { @class = "form-control", @type = "password" })
+                        <div class="control-label">User Type</div>
                         @Html.DropDownList("type", listItems, "-- Select User Type--", new { @class = "form-control" })
                     </div>
                     <div class="form-group">
@@ -147,10 +156,15 @@
                     </div>
                 </fieldset>
             }
+        </div>
 
-            <hr class="black" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="well">
 
-            <h3>Your Projects:</h3>
+            <h3>Tenant Projects:</h3>
 
             @if (Model.Projects.Count == 0)
             {
@@ -162,51 +176,34 @@
             {
 
                 <div class="row">
-                    <div class="col-md-1" style="vertical-align: middle">Id</div>
-                    <div class="col-md-2" style="vertical-align: middle">Name</div>
-                    <div class="col-md-2" style="vertical-align: middle">Start Date</div>
-                    <div class="col-md-2" style="vertical-align: middle">Expected End Date</div>
-                    <div class="col-md-1" style="vertical-align: middle">Status</div>
-                    <div class="col-md-2" style="vertical-align: middle">Manager</div>
-                    <div class="col-md-2" style="vertical-align: middle">Workers</div>
+                    <div class="col-md-2" style="vertical-align: middle"><b>Name</b></div>
+                    <div class="col-md-2" style="vertical-align: middle"><b>Start Date</b></div>
+                    <div class="col-md-2" style="vertical-align: middle"><b>End Date</b></div>
+                    <div class="col-md-2" style="vertical-align: middle"><b>Status</b></div>
+                    <div class="col-md-2" style="vertical-align: middle"><b>Manager</b></div>
+                    <div class="col-md-2" style="vertical-align: middle"><b>Workers</b></div>
                 </div>
 
                 foreach (ProjectManagement.Models.Project project in Model.Projects)
                 {
                     if (project != null)
                     {
-                        <div class="row">
-                            <div class="col-md-1" style="vertical-align: middle">@project.Id</div>
-                            <div class="col-md-2" style="vertical-align: middle">@project.Name</div>
-                            <div class="col-md-2" style="vertical-align: middle">@project.StartDate</div>
-                            <div class="col-md-2" style="vertical-align: middle">@project.ExpectedEndDate</div>
-                            <div class="col-md-1" style="vertical-align: middle">@project.Status</div>
-                            <div class="col-md-2" style="vertical-align: middle">@project.Manager</div>
-                            <div class="col-md-2" style="vertical-align: middle">
-
-                                @if (project.ProjectPersonnels.Count == 0)
-                                {
-                                    <div class="row">
-                                        None
-                                    </div>
-                                }
-                                else
-                                {
-                                    foreach (ProjectManagement.Models.ProjectPersonnel projectPersonnel in project.ProjectPersonnels) {
-                                    <div class="row">
-                                        @projectPersonnel.Personnel.Name
-                                    </div>
-                                    }
-                                }
-                            </div>
-                        </div>
+                <div class="row">
+                    <div class="col-md-2" style="vertical-align: middle">@Html.ActionLink(project.Name, "Project", new {projectId = project.Id})</div>
+                    <div class="col-md-2" style="vertical-align: middle">@project.StartDate.ToString().Split(' ').First()</div>
+                    <div class="col-md-2" style="vertical-align: middle">@project.ExpectedEndDate.ToString().Split(' ').First()</div>
+                    <div class="col-md-2" style="vertical-align: middle">@project.Status</div>
+                    <div class="col-md-2" style="vertical-align: middle">@project.Personnel.Name</div>
+                    <div class="col-md-2" style="vertical-align: middle">@project.ProjectPersonnels.Count()</div>
+                    
+                </div>
                     }
                 }
             }
 
             <hr class="black" />
 
-            <h3>Your Requirements:</h3>
+            <h3>All Requirements:</h3>
 
             @if (ViewBag.TenantRequirements.Count == 0)
             {
@@ -218,41 +215,33 @@
             {
 
                 <div class="row">
-                    <div class="col-md-1" style="vertical-align: middle">Id</div>
-                    <div class="col-md-2" style="vertical-align: middle">Name</div>
-                    <div class="col-md-2" style="vertical-align: middle">Description</div>
-                    <div class="col-md-1" style="vertical-align: middle">Type</div>
-                    <div class="col-md-1" style="vertical-align: middle">Time</div>
-                    <div class="col-md-2" style="vertical-align: middle">Status</div>
-                    <div class="col-md-1" style="vertical-align: middle">ProjectId</div>
-                    <div class="col-md-2" style="vertical-align: middle">ProjectName</div>
+                    <div class="col-md-2" style="vertical-align: middle"><b>Name</b></div>
+                    <div class="col-md-2" style="vertical-align: middle"><b>Type</b></div>
+                    <div class="col-md-2" style="vertical-align: middle"><b>Time</b></div>
+                    <div class="col-md-2" style="vertical-align: middle"><b>Status</b></div>
+                    <div class="col-md-2" style="vertical-align: middle"><b>Project</b></div>
+                    <div class="col-md-2" style="vertical-align: middle"><b>Assignee</b></div>
                 </div>
 
                 foreach (ProjectManagement.Models.Requirement requirement in ViewBag.TenantRequirements)
                 {
-                    if (requirement != null) { 
-                        <div class="row">
-                            <div class="col-md-1" style="vertical-align: middle">@requirement.Id</div>
-                            <div class="col-md-2" style="vertical-align: middle">@requirement.Name</div>
-                            <div class="col-md-2" style="vertical-align: middle">@requirement.Description</div>
-                            <div class="col-md-1" style="vertical-align: middle">@requirement.Type</div>
-                            <div class="col-md-1" style="vertical-align: middle">@requirement.Time</div>
-                            <div class="col-md-2" style="vertical-align: middle">@requirement.Status</div>
+                    if (requirement != null)
+                    { 
+                <div class="row">
+                    <div class="col-md-2" style="vertical-align: middle">@Html.ActionLink(requirement.Name, "Requirement", new { requirementId = requirement.Id })</div>
+                    <div class="col-md-2" style="vertical-align: middle">@requirement.Type</div>
+                    <div class="col-md-2" style="vertical-align: middle">@requirement.Time</div>
+                    <div class="col-md-2" style="vertical-align: middle">@requirement.Status</div>
 
-                            @if (requirement.RequirementsProjects.Count > 0) { 
-                                <div class="col-md-1" style="vertical-align: middle">@requirement.RequirementsProjects.Where(x => x.RequirementId == requirement.Id).Single().Project.Id</div>
-                                <div class="col-md-2" style="vertical-align: middle">@requirement.RequirementsProjects.Where(x => x.RequirementId == requirement.Id).Single().Project.Name</div>
-                            }
-                            else
-                            {
-                                 <div class="col-md-1" style="vertical-align: middle">None</div>
-                                <div class="col-md-2" style="vertical-align: middle">None</div>
-                            }
-                        </div>
+                    <div class="col-md-2" style="vertical-align: middle">@requirement.Project.Name</div>
+                    <div class="col-md-2" style="vertical-align: middle">@requirement.Personnel.Name</div>
+
+                </div>
                     }
                 }
             }
-
+            
         </div>
+
     </div>
 </div>

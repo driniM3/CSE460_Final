@@ -14,11 +14,6 @@ namespace ProjectManagement.Models
     
     public partial class Requirement
     {
-        public Requirement()
-        {
-            this.RequirementsProjects = new HashSet<RequirementsProject>();
-        }
-    
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -26,8 +21,9 @@ namespace ProjectManagement.Models
         public Nullable<double> Time { get; set; }
         public string Status { get; set; }
         public string Assignee { get; set; }
+        public int ProjectId { get; set; }
     
         public virtual Personnel Personnel { get; set; }
-        public virtual ICollection<RequirementsProject> RequirementsProjects { get; set; }
+        public virtual Project Project { get; set; }
     }
 }
