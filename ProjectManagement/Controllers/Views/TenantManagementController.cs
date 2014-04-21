@@ -94,16 +94,16 @@ namespace ProjectManagement.Controllers.Views
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddLogo(string tenantId, string logoUrl)
+        public ActionResult AddLogo(string tenantId, string Logo)
         {
             if (SecurityProvider.tenantAuth(RouteData.Values["tenant"].ToString(), User.Identity.Name))
             {
-                if (tenantId != null && logoUrl != null)
+                if (tenantId != null && Logo != null)
                 {
                     int Id = Convert.ToInt32(tenantId);
                     var tenant = db.Tenants.Where(x => x.Id == Id).Single();
 
-                    tenant.Logo = logoUrl;
+                    tenant.Logo = Logo;
 
                     db.Tenants.Attach(tenant);
                     db.Entry(tenant).State = System.Data.EntityState.Modified;
