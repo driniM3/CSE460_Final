@@ -110,7 +110,17 @@
                                 <option value="In Progress">In Progress</option>
                                 <option value="Completed" selected>Completed</option>
                             }
+                            else
+                            {
+                                <option value="@Model.Status" selected>@Model.Status</option>
+                                <option value="Started">Started</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Completed">Completed</option>
+                            }
                         </select>
+
+
+
                     </div>
                     @Html.Hidden("projectId", @Model.Id)
                     <div class="col-md-3">
