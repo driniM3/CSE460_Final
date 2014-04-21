@@ -3,8 +3,13 @@
     
     var t = this.ViewContext.RouteData.Values["tenant"].ToString();
     var db = new ProjectManagement.Models.PMEntities();
-
-    var tenant = db.Tenants.Where(x => x.Name.ToLower() == t.ToLower()).Single();
+    var tenant = new ProjectManagement.Models.Tenant
+    {
+        Style = "bootstrap.min.css"
+    };
+    if(!string.IsNullOrEmpty(t) && !string.IsNullOrWhiteSpace(t) && t.ToLower() != "new"){
+        tenant = db.Tenants.Where(x => x.Name.ToLower() == t.ToLower()).Single();
+    }
 }
 <html lang="en">
 <head>
